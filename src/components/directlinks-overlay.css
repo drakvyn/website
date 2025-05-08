@@ -1,0 +1,37 @@
+/* Overlay para todos los fondos blancos (bg-white de Tailwind) */
+[class*="bg-white"], .bg-white {
+  position: relative;
+  overflow: hidden;
+}
+[class*="bg-white"]::before, .bg-white::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url('/images/overlay.png') center center / cover no-repeat;
+  opacity: 1;
+  border-radius: inherit;
+}
+
+[class*="bg-white"] > *, .bg-white > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlay para textos claros (opcional, puedes ajustar o quitar) */
+.text-overlay {
+  position: relative;
+  display: inline-block;
+}
+.text-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/images/overlay.png') center center / cover no-repeat;
+  opacity: 1;
+  mix-blend-mode: multiply;
+  z-index: 2;
+  border-radius: inherit;
+} 
