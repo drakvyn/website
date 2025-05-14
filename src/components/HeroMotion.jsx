@@ -3,9 +3,9 @@ import './directlinks-overlay.css';
 
 export default function HeroMotion() {
   return (
-    <section className="flex flex-col justify-center min-h-[60vh]">
+    <section className="flex flex-col justify-center min-h-[60vh] px-4 md:px-0">
       <motion.p
-        className="text-lg md:text-xl text-white font-manrope mb-2"
+        className="text-base md:text-lg lg:text-xl text-white font-manrope mb-2 md:mb-4"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -13,9 +13,13 @@ export default function HeroMotion() {
         My name is <span className="font-bold">Jean Roa, The Software Wizard</span> and I'm a
       </motion.p>
       <motion.h1
-        className="font-squada text-white relative"
-        style={{ fontSize: '12rem', lineHeight: 0.7 }}
-        initial={{ y: 200, opacity: 0 }}
+        className="font-squada text-white relative tracking-tight md:tracking-normal"
+        style={{ 
+          fontSize: 'clamp(3rem, 15vw, 12rem)', 
+          lineHeight: '0.9',
+          wordBreak: 'break-word'
+        }}
+        initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ 
           duration: 1.2,
@@ -32,7 +36,8 @@ export default function HeroMotion() {
         >
           SOFTWARE DEVELOPER
         </motion.span>
-        <br />
+        <br className="md:block hidden" />
+        <div className="md:hidden h-2"></div>
         <motion.span 
           className="text-overlay inline-block"
           initial={{ clipPath: 'inset(100% 0 0 0)' }}

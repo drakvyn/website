@@ -1,0 +1,163 @@
+/* Project animations and styles */
+.project-text-animate {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: left;
+}
+
+.project-text-animate:hover {
+  transform: translateY(-5px);
+}
+
+.project-image-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.project-image-reveal.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Ensure project container maintains height */
+.project-container {
+  min-height: 500px;
+  position: relative;
+}
+
+.project-container .image-placeholder {
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Purple accent styles */
+.purple-accent {
+  color: #7e22ce; /* purple-700 */
+}
+
+.purple-gradient {
+  background: linear-gradient(135deg, #7e22ce, #9333ea); /* purple-700 to purple-600 */
+}
+
+.purple-glow {
+  box-shadow: 0 0 15px rgba(126, 34, 206, 0.5); /* purple-700 with opacity */
+}
+
+/* Title text animations */
+@keyframes textWave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.text-wave-animation {
+  animation: textWave 8s ease-in-out infinite;
+  animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+/* Project divider animations */
+@keyframes expandLine {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.project-divider {
+  transform: scaleX(0);
+  opacity: 0;
+  transform-origin: left;
+}
+
+.project-divider.animate {
+  animation: expandLine 1s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+/* Image hover effects */
+.project-image-container {
+  overflow: hidden;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.project-image {
+  transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+.project-image:hover {
+  transform: scale(1.1);
+}
+
+/* Button hover effects with purple accent */
+.button-hover-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-hover-effect:hover {
+  background-color: #6b21a8; /* purple-800 */
+  box-shadow: 0 5px 15px rgba(126, 34, 206, 0.4);
+}
+
+.button-hover-effect::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.button-hover-effect:hover::after {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Mobile specific styles */
+@media (max-width: 767px) {
+  .project-container {
+    min-height: auto;
+  }
+  
+  .text-wave-animation {
+    animation: none; /* Disable wave animation on mobile for better performance */
+  }
+  
+  .project-text-animate:hover {
+    transform: none; /* Disable hover transform on mobile */
+  }
+  
+  /* More subtle animations for better mobile performance */
+  .purple-glow {
+    box-shadow: 0 2px 8px rgba(126, 34, 206, 0.3);
+  }
+  
+  /* Ajustar grid para móviles */
+  .project-image-container {
+    border-radius: 12px;
+  }
+  
+  /* Mejorar contraste en elementos móviles */
+  .button-hover-effect {
+    font-weight: 600;
+  }
+  
+  /* Eliminar animaciones que puedan causar problemas de rendimiento */
+  .button-hover-effect::after {
+    display: none;
+  }
+} 

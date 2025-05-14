@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(110, 123, 255, 0.1);
+  background: rgba(126, 34, 206, 0.1);
   transition: all 0.5s ease;
 }
 
@@ -16,14 +16,14 @@
   position: absolute;
   inset: -5px;
   border-radius: 50%;
-  background: linear-gradient(45deg, transparent, rgba(110, 123, 255, 0.5), transparent);
+  background: linear-gradient(45deg, transparent, rgba(126, 34, 206, 0.5), transparent);
   opacity: 0;
   transition: opacity 0.5s ease;
 }
 
 .service-card:hover .service-icon {
   transform: translateY(-10px);
-  background: rgba(110, 123, 255, 0.2);
+  background: rgba(126, 34, 206, 0.2);
 }
 
 .service-card:hover .service-icon::before {
@@ -44,7 +44,7 @@
   left: 0;
   width: 0;
   height: 3px;
-  background: #6e7bff;
+  background: #7e22ce; /* purple-700 */
   transition: width 0.5s ease;
 }
 
@@ -74,7 +74,7 @@
   position: absolute;
   inset: 0;
   border-radius: 16px;
-  background: linear-gradient(to bottom right, rgba(110, 123, 255, 0.05), transparent);
+  background: linear-gradient(to bottom right, rgba(126, 34, 206, 0.05), transparent);
   opacity: 0;
   z-index: -1;
   transition: opacity 0.5s ease;
@@ -82,4 +82,14 @@
 
 .service-card:hover::before {
   opacity: 1;
+}
+
+/* Efecto de brillo para los elementos morados */
+.purple-glow {
+  box-shadow: 0 4px 15px rgba(126, 34, 206, 0.2);
+  transition: box-shadow 0.3s ease;
+}
+
+.purple-glow:hover {
+  box-shadow: 0 6px 20px rgba(126, 34, 206, 0.4);
 } 

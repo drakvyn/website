@@ -25,7 +25,8 @@ export default function DirectLinksMotion() {
         <div className="flex-1"></div>
         <div className="flex flex-row items-end justify-between w-full">
           <motion.a 
-            href="#" 
+            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            target="_blank"
             className="border-2 border-[#1F1B24] text-[#1F1B24] px-[15px] py-[10px] rounded-[5px] text-base font-manrope font-semibold text-center w-fit hover:bg-[#1F1B24] hover:text-white transition-all duration-200" 
             style={{ background: 'none' }}
             whileHover={{ 
@@ -36,7 +37,7 @@ export default function DirectLinksMotion() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            DOWNLOAD CV
+            DOWNLOAD RESUME
           </motion.a>
           <div className="flex gap-4">
             <motion.a 

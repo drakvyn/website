@@ -43,7 +43,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
               style={{ backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})` }}>
               <div className="absolute inset-0 bg-gradient-to-t from-[#181924] to-transparent" />
               <div className="absolute bottom-0 left-0 p-8">
-                <h2 className="text-6xl font-squada text-white tracking-wide">{project.title}</h2>
+                <h2 className="text-6xl font-squada text-white tracking-wide uppercase">{project.title}</h2>
               </div>
             </div>
 
@@ -109,7 +109,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                     href={project.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-block px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
+                    className="px-6 py-3 bg-purple-700 text-white text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
                   >
                     VIEW PROJECT
                   </a>

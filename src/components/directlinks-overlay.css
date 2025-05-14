@@ -19,7 +19,49 @@
   z-index: 2;
 }
 
-/* Overlay para textos claros (opcional, puedes ajustar o quitar) */
+/* Overlay para elementos con fondo morado */
+[class*="bg-purple-700"], .bg-purple-700, [class*="bg-purple-800"], .bg-purple-800,
+[class*="hover:bg-purple-700"]:hover, [class*="hover:bg-purple-800"]:hover {
+  position: relative;
+  overflow: hidden;
+}
+
+[class*="bg-purple-700"]::before, .bg-purple-700::before,
+[class*="bg-purple-800"]::before, .bg-purple-800::before,
+[class*="hover:bg-purple-700"]:hover::before, [class*="hover:bg-purple-800"]:hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: url('/images/overlay.png') center center / cover no-repeat;
+  opacity: 0.2;
+  border-radius: inherit;
+  mix-blend-mode: overlay;
+}
+
+[class*="bg-purple-700"] > *, .bg-purple-700 > *,
+[class*="bg-purple-800"] > *, .bg-purple-800 > *,
+[class*="hover:bg-purple-700"]:hover > *, [class*="hover:bg-purple-800"]:hover > * {
+  position: relative;
+  z-index: 2;
+}
+
+[class*="border-purple-700"]::after, .border-purple-700::after,
+[class*="border-purple-800"]::after, .border-purple-800::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/images/overlay.png') center center / cover no-repeat;
+  opacity: 0.15;
+  border-radius: inherit;
+  mix-blend-mode: overlay;
+  filter: brightness(1.2);
+}
+
+/* Overlay para textos claros */
 .text-overlay {
   position: relative;
   display: inline-block;
@@ -34,4 +76,23 @@
   mix-blend-mode: multiply;
   z-index: 2;
   border-radius: inherit;
+}
+
+/* Estilos para móviles */
+@media (max-width: 767px) {
+  .text-overlay {
+    display: inline;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .text-overlay::after {
+    display: none;
+  }
+  
+  /* Aplicar un efecto más sutil en móviles */
+  [class*="bg-purple-700"]::before, .bg-purple-700::before,
+  [class*="bg-purple-800"]::before, .bg-purple-800::before {
+    opacity: 0.1;
+  }
 } 

@@ -17,7 +17,7 @@ function BlogCard({ post }) {
 
   return (
     <motion.article 
-      className="bg-[#181924] rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      className="bg-[#181924] rounded-lg md:rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -25,7 +25,7 @@ function BlogCard({ post }) {
       whileHover={{ y: -5 }}
     >
       <a href={`/blog/${post.slug.current}`} className="block">
-        <div className="relative h-48 bg-[#12131c] overflow-hidden">
+        <div className="relative h-40 md:h-48 bg-[#12131c] overflow-hidden">
           {post.mainImage?.asset?.url ? (
             <img 
               src={post.mainImage.asset.url} 
@@ -40,15 +40,15 @@ function BlogCard({ post }) {
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#181924] to-transparent h-1/4" />
         </div>
         
-        <div className="p-6">
-          <div className="flex items-center mb-4">
-            <span className="text-sm text-zinc-400">{formatDate(post.publishedAt)}</span>
+        <div className="p-4 md:p-6">
+          <div className="flex flex-wrap items-center mb-3 md:mb-4 gap-2">
+            <span className="text-xs md:text-sm text-zinc-400">{formatDate(post.publishedAt)}</span>
             {post.categories && post.categories.length > 0 && (
-              <div className="ml-auto flex gap-2">
+              <div className="flex gap-1 md:gap-2 flex-wrap">
                 {post.categories.map((category, index) => (
                   <span 
                     key={index}
-                    className="px-2 py-1 text-xs bg-[#12131c] text-zinc-400 rounded-full"
+                    className="px-2 py-0.5 md:py-1 text-xs bg-[#12131c] text-zinc-400 rounded-full"
                   >
                     {category}
                   </span>
@@ -57,26 +57,26 @@ function BlogCard({ post }) {
             )}
           </div>
           
-          <h3 className="text-2xl font-squada text-white tracking-wide mb-3">
+          <h3 className="text-xl md:text-2xl font-squada text-white tracking-wide mb-2 md:mb-3">
             {post.title}
           </h3>
           
           {post.excerpt && (
-            <p className="text-zinc-400 mb-4 line-clamp-2">
+            <p className="text-sm md:text-base text-zinc-400 mb-3 md:mb-4 line-clamp-2">
               {post.excerpt}
             </p>
           )}
           
-          <div className="flex items-center mt-6">
-            <div className="w-10 h-10 rounded-full overflow-hidden mr-3 bg-[#12131c] flex items-center justify-center">
-              <span className="text-lg">👤</span>
+          <div className="flex items-center mt-4 md:mt-6">
+            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden mr-2 md:mr-3 bg-[#12131c] flex items-center justify-center">
+              <span className="text-base md:text-lg">👤</span>
             </div>
-            <span className="text-zinc-300 text-sm">
+            <span className="text-zinc-300 text-xs md:text-sm">
               Jean Roa
             </span>
             
             <div className="ml-auto">
-              <span className="text-[#6e7bff] font-semibold text-sm">Read more</span>
+              <span className="text-purple-700 font-semibold text-xs md:text-sm">Read more</span>
             </div>
           </div>
         </div>
@@ -111,47 +111,29 @@ export default function BlogSection() {
   const placeholderPosts = [
     {
       _id: '1',
-      title: 'How to Create Fluid Animations with Framer Motion',
-      slug: { current: 'animations-framer-motion' },
+      title: 'Hardcoded blogpost',
+      slug: { current: 'hardcoded' },
       publishedAt: new Date().toISOString(),
-      excerpt: 'Learn how to create impressive and fluid animations for your websites using the Framer Motion library.',
-      mainImage: { asset: { url: '/placeholder-blog-1.jpg' } },
+      excerpt: 'This is a hardcoded blog post',
+      mainImage: { asset: { url: 'https://media.licdn.com/dms/image/v2/D4E22AQF8IIc_heTIcg/feedshare-shrink_800/B4EZaRyJwyGYAg-/0/1746202566470?e=1750291200&v=beta&t=GhuAYakLolKmZSd2T6X5uf3xpMtZShPww-pb4t6FEz8' } },
       categories: ['Web Development', 'React']
     },
-    {
-      _id: '2',
-      title: 'Performance Optimization in Modern Websites',
-      slug: { current: 'web-performance-optimization' },
-      publishedAt: new Date().toISOString(),
-      excerpt: 'Techniques and strategies to improve the speed and performance of your website.',
-      mainImage: { asset: { url: '/placeholder-blog-2.jpg' } },
-      categories: ['Performance', 'Web']
-    },
-    {
-      _id: '3',
-      title: 'UI/UX Design for Developers',
-      slug: { current: 'ui-ux-design-for-developers' },
-      publishedAt: new Date().toISOString(),
-      excerpt: 'Practical guide for developers to improve their UI/UX design skills.',
-      mainImage: { asset: { url: '/placeholder-blog-3.jpg' } },
-      categories: ['Design', 'UI/UX']
-    }
   ];
 
   // Use placeholders if loading or there's an error
   const displayPosts = loading || error || posts.length === 0 ? placeholderPosts : posts;
 
   return (
-    <section className="py-24 w-full bg-[#0e0e16]">
+    <section className="py-12 md:py-24 w-full bg-[#0e0e16]">
       <div className="container mx-auto px-4">
         <motion.div
-          className="mb-16 text-center"
+          className="mb-10 md:mb-16 text-center"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-squada text-white relative text-6xl md:text-8xl tracking-wide">
+          <h2 className="font-squada text-white relative text-5xl sm:text-6xl md:text-8xl tracking-wide">
             <motion.span 
               className="text-overlay inline-block"
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
@@ -163,7 +145,7 @@ export default function BlogSection() {
             </motion.span>
           </h2>
           <motion.p
-            className="text-lg text-zinc-400 mt-4 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-zinc-400 mt-3 md:mt-4 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -179,14 +161,14 @@ export default function BlogSection() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
           {displayPosts.map(post => (
             <BlogCard key={post._id} post={post} />
           ))}
         </div>
 
         <motion.div 
-          className="mt-16 text-center"
+          className="mt-10 md:mt-16 text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -194,9 +176,9 @@ export default function BlogSection() {
         >
           <a 
             href="/blog" 
-            className="inline-block px-8 py-4 bg-[#181924] text-white text-xl font-semibold rounded-lg hover:bg-[#6e7bff] transition-colors duration-300"
+            className="inline-block px-6 py-3 md:px-8 md:py-4 bg-purple-700 text-white text-base md:text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 relative overflow-hidden button-hover-effect"
           >
-            VIEW ALL ARTICLES
+            <span className="relative z-10">VIEW ALL ARTICLES</span>
           </a>
         </motion.div>
       </div>

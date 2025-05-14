@@ -80,7 +80,7 @@ function ParticlesBackground() {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: Math.random() * 2 + 0.5,
-          color: `rgba(110, 123, 255, ${Math.random() * 0.4 + 0.1})`,
+          color: `rgba(126, 34, 206, ${Math.random() * 0.4 + 0.1})`,
           speedX: Math.random() * 0.5 - 0.25,
           speedY: Math.random() * 0.5 - 0.25
         });
@@ -130,7 +130,7 @@ function ParticlesBackground() {
           
           if (distance < maxDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(110, 123, 255, ${(maxDistance - distance) / maxDistance * 0.3})`;
+            ctx.strokeStyle = `rgba(126, 34, 206, ${(maxDistance - distance) / maxDistance * 0.3})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -244,46 +244,41 @@ export default function ServicesSection() {
                   hoveredService === service.id ? 'h-12 opacity-100' : 'h-0 opacity-0'
                 }`}>
                   <motion.button
-                    className="px-8 py-3 bg-[#6e7bff] text-white rounded-lg font-semibold hover:bg-[#5664ff] transition-colors"
+                    className="px-8 py-3 bg-purple-700 text-white rounded-lg font-semibold hover:bg-purple-800 transition-colors relative overflow-hidden button-hover-effect"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    LEARN MORE
+                    <span className="relative z-10">LEARN MORE</span>
                   </motion.button>
+                </div>
+                
+                {/* Animated line at bottom */}
+                <div className="absolute bottom-0 left-0 w-full h-0.5">
+                  <motion.div 
+                    className="h-full bg-purple-700"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: hoveredService === service.id ? '100%' : '0%' }}
+                    transition={{ duration: 0.5 }}
+                  />
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-
+        
         <motion.div 
           className="mt-24 text-center"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h3 className="font-squada text-4xl md:text-5xl text-white mb-6 relative">
-            <motion.span 
-              className="text-overlay inline-block"
-              initial={{ clipPath: 'inset(100% 0 0 0)' }}
-              whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              READY TO START?
-            </motion.span>
-          </h3>
-          <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-            Let's make your next project a reality with unique design and exceptional functionality.
-          </p>
-          <motion.button
-            className="px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
+          <a 
+            href="/services" 
+            className="inline-block px-10 py-5 bg-purple-700 text-white text-2xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
           >
-            CONTACT
-          </motion.button>
+            <span className="relative z-10">VIEW ALL SERVICES</span>
+          </a>
         </motion.div>
       </div>
     </section>
