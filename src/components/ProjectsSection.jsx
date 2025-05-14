@@ -105,7 +105,7 @@ export default function ProjectsSection() {
       title: 'E-commerce Website',
       slug: { current: 'ecommerce-website' },
       description: 'A modern e-commerce platform with advanced filtering and smooth animations.',
-      mainImage: { asset: { url: '/placeholder-project-1.jpg' } },
+      mainImage: { asset: { url: 'https://media.licdn.com/dms/image/v2/D4E22AQF8IIc_heTIcg/feedshare-shrink_800/B4EZaRyJwyGYAg-/0/1746202566470?e=1750291200&v=beta&t=GhuAYakLolKmZSd2T6X5uf3xpMtZShPww-pb4t6FEz8' } },
       tags: ['React', 'Node.js', 'MongoDB'],
       challenges: ['Complex product filtering', 'Shopping cart implementation', 'Payment processing'],
       solutions: ['Custom filter algorithm', 'Context API for state management', 'Stripe integration'],
@@ -156,7 +156,7 @@ export default function ProjectsSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              PROJECTS
+              LATEST PROJECTS
             </motion.span>
           </h2>
           <motion.p

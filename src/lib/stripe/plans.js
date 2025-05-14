@@ -1,54 +1,48 @@
 // Define available plans for purchase
 export const plans = [
   {
-    id: 'plan_basic',
-    name: 'Basic Plan',
-    description: 'Ideal plan for small projects and basic online presence.',
+    id: 'plan_essential',
+    name: 'Essential Plan',
+    description: 'Perfect for small businesses needing occasional tech solutions.',
     features: [
-      'Responsive website',
-      'Up to 5 pages',
-      'Basic contact form',
-      'Basic SEO',
-      'Email support'
+      'Up to 4 hours of development work (web, apps, automation, AI integration)',
+      'Technical consulting & guidance',
+      'Email support (48h response)',
+      'Monthly progress report'
     ],
-    price: 499,
-    priceId: 'price_basic', // This ID will be configured in Stripe
+    price: 149,
+    priceId: 'price_essential', // This ID will be configured in Stripe
     popular: false,
     color: 'blue'
   },
   {
-    id: 'plan_standard',
-    name: 'Standard Plan',
-    description: 'Complete solution for businesses seeking a professional presence.',
+    id: 'plan_professional',
+    name: 'Professional Plan',
+    description: 'Ideal for businesses needing regular development and automation tasks.',
     features: [
-      'Everything in Basic Plan',
-      'Up to 10 pages',
-      'Integrated blog',
-      'Social media integration',
-      'Advanced SEO optimization',
-      'Priority support',
-      'Monthly maintenance'
+      'Up to 10 hours of development work',
+      'Technical consulting & solution design',
+      'Email & chat support (24-48h response)',
+      'Task prioritization queue',
+      'Bi-weekly progress updates'
     ],
-    price: 999,
-    priceId: 'price_standard', // This ID will be configured in Stripe
+    price: 299,
+    priceId: 'price_professional', // This ID will be configured in Stripe
     popular: true,
     color: 'purple'
   },
   {
     id: 'plan_premium',
     name: 'Premium Plan',
-    description: 'Complete solution with advanced features for growing businesses.',
+    description: 'For businesses seeking a reliable development partner with priority access.',
     features: [
-      'Everything in Standard Plan',
-      'Unlimited pages',
-      'E-commerce (up to 50 products)',
-      'Booking/appointment system',
-      'CRM integration',
-      '24/7 support',
-      'Unlimited content updates',
-      'Monthly performance optimization'
+      'Up to 20 hours of dedicated development work',
+      'Full technical consulting & strategy sessions',
+      'Priority support (response within 24h)',
+      'Weekly progress updates',
+      'Task fast-track (priority handling)'
     ],
-    price: 1999,
+    price: 499,
     priceId: 'price_premium', // This ID will be configured in Stripe
     popular: false,
     color: 'indigo'

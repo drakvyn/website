@@ -135,7 +135,7 @@ export default function PricingSection() {
                   <p className="text-5xl font-squada text-white flex items-start">
                     <span className="text-lg mt-2 mr-1">$</span>
                     {plan.price}
-                    <span className="text-zinc-400 text-xl ml-2 mt-4">USD</span>
+                    <span className="text-zinc-400 text-xl ml-2 mt-3">USD / month</span>
                   </p>
                 </div>
                 

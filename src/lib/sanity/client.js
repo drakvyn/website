@@ -9,7 +9,7 @@ export const client = createClient({
 
 // Helper function to fetch blog posts with pagination
 export async function getBlogPosts(limit = 3, start = 0) {
-  const query = `*[_type == "blogPost"] | order(publishedAt desc) [${start}...${start + limit}] {
+  const query = `*[_type in ["blogPost", "post"]] | order(publishedAt desc) [${start}...${start + limit}] {
     _id,
     title,
     slug,
@@ -29,7 +29,7 @@ export async function getBlogPosts(limit = 3, start = 0) {
 
 // Helper function to fetch a single blog post by slug
 export async function getBlogPostBySlug(slug) {
-  const query = `*[_type == "blogPost" && slug.current == $slug][0] {
+  const query = `*[(_type == "blogPost" || _type == "post") && slug.current == $slug][0] {
     _id,
     title,
     slug,
