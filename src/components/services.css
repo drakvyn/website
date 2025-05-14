@@ -1,0 +1,85 @@
+/* Estilos para los iconos de servicios */
+.service-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(110, 123, 255, 0.1);
+  transition: all 0.5s ease;
+}
+
+.service-icon::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent, rgba(110, 123, 255, 0.5), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: translateY(-10px);
+  background: rgba(110, 123, 255, 0.2);
+}
+
+.service-card:hover .service-icon::before {
+  opacity: 1;
+  animation: rotate 2s linear infinite;
+}
+
+/* Efecto de línea animada debajo de los títulos */
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: #6e7bff;
+  transition: width 0.5s ease;
+}
+
+.service-card:hover .animated-underline::after {
+  width: 100%;
+}
+
+/* Animación de rotación para el efecto del ícono */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efecto de hover para las tarjetas de servicio */
+.service-card {
+  position: relative;
+  z-index: 1;
+  transition: all 0.5s ease;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(to bottom right, rgba(110, 123, 255, 0.05), transparent);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+} 

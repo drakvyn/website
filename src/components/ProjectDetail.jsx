@@ -1,0 +1,106 @@
+import { motion, AnimatePresence } from 'framer-motion';
+
+export default function ProjectDetail({ project, isOpen, onClose }) {
+  if (!project) return null;
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div 
+            className="absolute inset-0 bg-black/80"
+            onClick={onClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+          
+          <motion.div
+            className="bg-[#181924] w-full max-w-5xl max-h-[90vh] rounded-lg z-10 overflow-auto relative"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 50, opacity: 0 }}
+            transition={{ duration: 0.4, type: "spring" }}
+          >
+            <button
+              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full text-white text-3xl focus:outline-none z-10"
+              onClick={onClose}
+              style={{ background: 'rgba(0,0,0,0.4)' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+
+            <div className="h-[40vh] w-full bg-cover bg-center relative" 
+              style={{ backgroundImage: `url(${project.image})` }}>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#181924] to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8">
+                <h2 className="text-6xl font-squada text-white tracking-wide">{project.title}</h2>
+              </div>
+            </div>
+
+            <div className="p-8">
+              <div className="flex flex-wrap gap-3 mb-6">
+                {project.tags.map((tag, index) => (
+                  <span 
+                    key={index} 
+                    className="px-3 py-1 text-sm rounded-full bg-[#12131c] text-zinc-400"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-zinc-300 text-lg mb-8">{project.description}</p>
+
+              <div className="mb-8">
+                <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
+                <p className="text-zinc-400">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, dui ut tempus blandit, odio sem elementum purus, quis lobortis nibh lacus ac neque. Nullam auctor consectetur dolor, vitae ultricies enim. Nullam consectetur elementum nunc, ut dignissim velit euismod vel.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <h3 className="text-3xl font-squada text-white mb-4">CHALLENGES</h3>
+                  <ul className="list-disc pl-5 text-zinc-400 space-y-2">
+                    <li>Complex animation sequences</li>
+                    <li>Optimizing performance</li>
+                    <li>Cross-browser compatibility</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="text-3xl font-squada text-white mb-4">SOLUTIONS</h3>
+                  <ul className="list-disc pl-5 text-zinc-400 space-y-2">
+                    <li>Framer Motion animations</li>
+                    <li>Code splitting and lazy loading</li>
+                    <li>Thorough browser testing</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
+                >
+                  VIEW PROJECT
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+} 
