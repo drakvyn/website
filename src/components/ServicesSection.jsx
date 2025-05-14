@@ -12,8 +12,8 @@ const services = [
   },
   {
     id: 2,
-    title: "UI/UX DESIGN",
-    description: "Design of attractive and functional interfaces that captivate users and enhance the experience.",
+    title: "CUSTOM SOFTWARE DEVELOPMENT",
+    description: "Internal tools, dashboards, process automation, and more.",
     icon: "✨"
   },
   {

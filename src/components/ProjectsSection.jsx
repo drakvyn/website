@@ -102,7 +102,7 @@ export default function ProjectsSection() {
   const placeholderProjects = [
     {
       _id: '1',
-      title: 'E-commerce Website',
+      title: 'Website',
       slug: { current: 'ecommerce-website' },
       description: 'A modern e-commerce platform with advanced filtering and smooth animations.',
       mainImage: { asset: { url: 'https://media.licdn.com/dms/image/v2/D4E22AQF8IIc_heTIcg/feedshare-shrink_800/B4EZaRyJwyGYAg-/0/1746202566470?e=1750291200&v=beta&t=GhuAYakLolKmZSd2T6X5uf3xpMtZShPww-pb4t6FEz8' } },
@@ -111,28 +111,7 @@ export default function ProjectsSection() {
       solutions: ['Custom filter algorithm', 'Context API for state management', 'Stripe integration'],
       link: 'https://example.com/ecommerce'
     },
-    {
-      _id: '2',
-      title: 'Mobile Banking App',
-      slug: { current: 'mobile-banking-app' },
-      description: 'A secure and user-friendly mobile banking application with real-time transaction updates.',
-      mainImage: { asset: { url: '/placeholder-project-2.jpg' } },
-      tags: ['React Native', 'Firebase', 'Redux'],
-      challenges: ['Secure authentication', 'Real-time updates', 'Complex financial calculations'],
-      solutions: ['Two-factor authentication', 'Firestore real-time database', 'Custom calculation engine'],
-      link: 'https://example.com/banking-app'
-    },
-    {
-      _id: '3',
-      title: 'Portfolio Website',
-      slug: { current: 'portfolio-website' },
-      description: 'A creative and interactive portfolio website with unique animations and immersive experience.',
-      mainImage: { asset: { url: '/placeholder-project-3.jpg' } },
-      tags: ['Next.js', 'Framer Motion', 'Three.js'],
-      challenges: ['Performance optimization', 'Complex animations', 'Responsive design'],
-      solutions: ['Code splitting', 'Framer Motion sequences', 'Mobile-first approach'],
-      link: 'https://example.com/portfolio'
-    }
+    
   ];
 
   // Use placeholders if loading or there's an error
