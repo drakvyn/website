@@ -5,18 +5,22 @@ import HeroMotion from '../components/HeroMotion.jsx';
 import DirectLinksMotion from '../components/DirectLinksMotion.jsx';
 import ProjectsSection from '../components/ProjectsSection.jsx';
 import ServicesSection from '../components/ServicesSection.jsx';
+import BlogSection from '../components/BlogSection.jsx';
+import PricingSection from '../components/PricingSection.jsx';
 ---
 
-<Layout title="Jean Roa -Software Developer">
+<Layout title="Jean Roa - Software Developer">
 	<MenuButton client:load />
 	<main class="flex flex-col min-h-screen">
 		<div class="container mx-auto px-4 py-8 flex flex-col items-start justify-center min-h-screen">
 			<HeroMotion client:load />
 			<DirectLinksMotion client:load />
 		</div>
+		<ServicesSection client:load />
 		<div class="container mx-auto px-4">
 			<ProjectsSection client:load />
 		</div>
-		<ServicesSection client:load />
+		<BlogSection client:load />
+		<PricingSection client:load />
 	</main>
 </Layout>

@@ -40,7 +40,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
             </button>
 
             <div className="h-[40vh] w-full bg-cover bg-center relative" 
-              style={{ backgroundImage: `url(${project.image})` }}>
+              style={{ backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})` }}>
               <div className="absolute inset-0 bg-gradient-to-t from-[#181924] to-transparent" />
               <div className="absolute bottom-0 left-0 p-8">
                 <h2 className="text-6xl font-squada text-white tracking-wide">{project.title}</h2>
@@ -49,7 +49,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
 
             <div className="p-8">
               <div className="flex flex-wrap gap-3 mb-6">
-                {project.tags.map((tag, index) => (
+                {project.tags && project.tags.map((tag, index) => (
                   <span 
                     key={index} 
                     className="px-3 py-1 text-sm rounded-full bg-[#12131c] text-zinc-400"
@@ -64,7 +64,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
               <div className="mb-8">
                 <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
                 <p className="text-zinc-400">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla, dui ut tempus blandit, odio sem elementum purus, quis lobortis nibh lacus ac neque. Nullam auctor consectetur dolor, vitae ultricies enim. Nullam consectetur elementum nunc, ut dignissim velit euismod vel.
+                  {project.detailedDescription || "This project was built with a focus on user experience and performance. The main goal was to create an intuitive interface that provides a smooth and engaging experience while maintaining optimal loading times and responsiveness."}
                 </p>
               </div>
 
@@ -72,31 +72,49 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                 <div>
                   <h3 className="text-3xl font-squada text-white mb-4">CHALLENGES</h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    <li>Complex animation sequences</li>
-                    <li>Optimizing performance</li>
-                    <li>Cross-browser compatibility</li>
+                    {project.challenges && project.challenges.length > 0 ? (
+                      project.challenges.map((challenge, index) => (
+                        <li key={index}>{challenge}</li>
+                      ))
+                    ) : (
+                      <>
+                        <li>Complex animation sequences</li>
+                        <li>Optimizing performance</li>
+                        <li>Cross-browser compatibility</li>
+                      </>
+                    )}
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-3xl font-squada text-white mb-4">SOLUTIONS</h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    <li>Framer Motion animations</li>
-                    <li>Code splitting and lazy loading</li>
-                    <li>Thorough browser testing</li>
+                    {project.solutions && project.solutions.length > 0 ? (
+                      project.solutions.map((solution, index) => (
+                        <li key={index}>{solution}</li>
+                      ))
+                    ) : (
+                      <>
+                        <li>Framer Motion animations</li>
+                        <li>Code splitting and lazy loading</li>
+                        <li>Thorough browser testing</li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>
 
-              <div className="flex justify-center">
-                <a 
-                  href={project.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-block px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
-                >
-                  VIEW PROJECT
-                </a>
-              </div>
+              {project.link && (
+                <div className="flex justify-center">
+                  <a 
+                    href={project.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-block px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
+                  >
+                    VIEW PROJECT
+                  </a>
+                </div>
+              )}
             </div>
           </motion.div>
         </motion.div>

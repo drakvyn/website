@@ -7,25 +7,25 @@ const services = [
   {
     id: 1,
     title: "WEB DEVELOPMENT",
-    description: "Creación de sitios web y aplicaciones personalizadas con animaciones únicas y experiencias interactivas.",
+    description: "Creation of custom websites and applications with unique animations and interactive experiences.",
     icon: "🌐"
   },
   {
     id: 2,
     title: "UI/UX DESIGN",
-    description: "Diseño de interfaces atractivas y funcionales que cautivan a los usuarios y mejoran la experiencia.",
+    description: "Design of attractive and functional interfaces that captivate users and enhance the experience.",
     icon: "✨"
   },
   {
     id: 3,
     title: "MOBILE APPS",
-    description: "Desarrollo de aplicaciones móviles para iOS y Android que destacan por su rendimiento y diseño.",
+    description: "Development of mobile applications for iOS and Android that stand out for their performance and design.",
     icon: "📱"
   },
   {
     id: 4,
     title: "E-COMMERCE",
-    description: "Creación de tiendas online optimizadas para conversiones y con experiencias de compra fluidas.",
+    description: "Creation of online stores optimized for conversions and with smooth shopping experiences.",
     icon: "🛒"
   }
 ];
@@ -53,7 +53,7 @@ const itemVariants = {
   }
 };
 
-// Componente para las partículas animadas
+// Component for animated particles
 function ParticlesBackground() {
   const canvasRef = useRef(null);
   
@@ -63,17 +63,17 @@ function ParticlesBackground() {
     let particles = [];
     let animationFrameId;
     
-    // Ajustar tamaño del canvas
+    // Adjust canvas size
     const resizeCanvas = () => {
       canvas.width = canvas.parentElement.offsetWidth;
       canvas.height = canvas.parentElement.offsetHeight;
       initParticles();
     };
     
-    // Inicializar partículas
+    // Initialize particles
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.floor(canvas.width / 15); // Ajustar según densidad deseada
+      const particleCount = Math.floor(canvas.width / 15); // Adjust according to desired density
       
       for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -87,16 +87,16 @@ function ParticlesBackground() {
       }
     };
     
-    // Animar partículas
+    // Animate particles
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       particles.forEach(particle => {
-        // Actualizar posición
+        // Update position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
         
-        // Rebote en los bordes
+        // Bounce on edges
         if (particle.x < 0 || particle.x > canvas.width) {
           particle.speedX = -particle.speedX;
         }
@@ -105,20 +105,20 @@ function ParticlesBackground() {
           particle.speedY = -particle.speedY;
         }
         
-        // Dibujar partícula
+        // Draw particle
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
         ctx.fill();
       });
       
-      // Conectar partículas cercanas
+      // Connect nearby particles
       connectParticles();
       
       animationFrameId = requestAnimationFrame(animate);
     };
     
-    // Conectar partículas cercanas con líneas
+    // Connect nearby particles with lines
     const connectParticles = () => {
       const maxDistance = 100;
       
@@ -140,14 +140,14 @@ function ParticlesBackground() {
       }
     };
     
-    // Inicializar
+    // Initialize
     resizeCanvas();
     animate();
     
-    // Manejar redimensionamiento
+    // Handle resizing
     window.addEventListener('resize', resizeCanvas);
     
-    // Limpieza
+    // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
@@ -195,7 +195,7 @@ export default function ServicesSection() {
             transition={{ duration: 0.7, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Soluciones creativas y técnicas para hacer realidad tu visión digital con un enfoque en animaciones y experiencias interactivas.
+            Creative and technical solutions to bring your digital vision to life with a focus on animations and interactive experiences.
           </motion.p>
         </motion.div>
 
@@ -248,7 +248,7 @@ export default function ServicesSection() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    SABER MÁS
+                    LEARN MORE
                   </motion.button>
                 </div>
               </div>
@@ -271,18 +271,18 @@ export default function ServicesSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              ¿LISTO PARA COMENZAR?
+              READY TO START?
             </motion.span>
           </h3>
           <p className="text-zinc-400 mb-8 max-w-2xl mx-auto">
-            Hagamos realidad tu próximo proyecto con un diseño único y funcionalidad excepcional.
+            Let's make your next project a reality with unique design and exceptional functionality.
           </p>
           <motion.button
             className="px-8 py-4 bg-[#6e7bff] text-white text-xl font-semibold rounded-lg hover:bg-[#5664ff] transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            CONTACTAR
+            CONTACT
           </motion.button>
         </motion.div>
       </div>

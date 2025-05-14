@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.2.7",
+    "@sanity/client": "^7.2.1",
+    "@stripe/stripe-js": "^7.3.0",
     "astro": "^5.7.11",
+    "astro-i18n": "^2.2.4",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.10.1",
+    "next-sanity": "^9.11.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "stripe": "^18.1.0"
