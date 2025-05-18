@@ -1,16 +1,18 @@
-// Schema for blog posts in Sanity Studio
-export default {
-  name: 'blog1',
-  title: 'Blog',
+import {defineType, defineField, defineArrayMember} from 'sanity'
+
+// Schema for projects in Sanity Studio
+export default defineType({
+  name: 'project',
+  title: 'Project',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -19,42 +21,42 @@ export default {
         maxLength: 96
       },
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'mainImage',
-      title: 'Main image',
+      title: 'Main Image',
       type: 'image',
       options: {
         hotspot: true
       },
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Texto corto',
       type: 'text',
-      description: 'Un resumen breve del blog post',
+      description: 'Un resumen breve del proyecto',
       validation: Rule => Rule.max(300).required()
-    },
-    {
+    }),
+    defineField({
       name: 'body',
       title: 'Contenido',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block'
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'image',
           options: { hotspot: true }
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'code',
           title: 'Code Block',
           options: {
@@ -70,10 +72,22 @@ export default {
               { title: 'Bash', value: 'bash' }
             ]
           }
-        }
+        })
       ],
       validation: Rule => Rule.required()
-    }
+    }),
+    defineField({
+      name: 'repoUrl',
+      title: 'Repository URL',
+      type: 'url',
+      description: 'Link to project repository'
+    }),
+    defineField({
+      name: 'liveUrl',
+      title: 'Live Website URL',
+      type: 'url',
+      description: 'Link to live project website'
+    })
   ],
   preview: {
     select: {
@@ -81,4 +95,4 @@ export default {
       media: 'mainImage'
     }
   }
-}; 
+}); 

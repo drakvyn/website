@@ -20,11 +20,11 @@
 }
 
 /* Overlay para elementos con fondo morado */
-[class*="bg-purple-700"], .bg-purple-700, [class*="bg-purple-800"], .bg-purple-800,
+/* [class*="bg-purple-700"], .bg-purple-700, [class*="bg-purple-800"], .bg-purple-800,
 [class*="hover:bg-purple-700"]:hover, [class*="hover:bg-purple-800"]:hover {
   position: relative;
   overflow: hidden;
-}
+} */
 
 [class*="bg-purple-700"]::before, .bg-purple-700::before,
 [class*="bg-purple-800"]::before, .bg-purple-800::before,

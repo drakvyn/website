@@ -76,7 +76,7 @@ export default function PricingSection() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-squada text-white relative text-5xl sm:text-6xl md:text-8xl tracking-wide">
+          <h2 className="font-squada text-white relative text-5xl sm:text-6xl md:text-8xl tracking-wide uppercase">
             <motion.span 
               className="text-overlay inline-block"
               initial={{ clipPath: 'inset(100% 0 0 0)' }}

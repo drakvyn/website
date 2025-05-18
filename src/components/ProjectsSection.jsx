@@ -151,25 +151,7 @@ function ProjectCard({ project, index, onClick }) {
                 <span className="relative z-10">VIEW DETAILS</span>
               </button>
             </motion.div>
-            
-            {/* {isMobile && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <button 
-                  className="px-4 py-2 bg-transparent border border-purple-700 text-white text-base font-semibold rounded-lg transition-all duration-300 relative overflow-hidden"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleTouch();
-                  }}
-                >
-                  <span className="relative z-10">{hovered ? "HIDE IMAGE" : "VIEW IMAGE"}</span>
-                </button>
-              </motion.div>
-            )} */}
+          
           </div>
         </div>
         

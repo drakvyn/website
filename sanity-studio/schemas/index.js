@@ -1,9 +1,9 @@
-import blogPost from './blogPost';
-import project from './project';
+import blockContent from './blockContent'
+import blog from './blog'
+import project from './project'
 
-export const schemaTypes = [blogPost, project];
-
-export default {
-  blogPost,
-  project
-}; 
+export const schemaTypes = [
+  blockContent,
+  blog,
+  project,
+] 

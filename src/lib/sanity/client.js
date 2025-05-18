@@ -9,7 +9,7 @@ export const client = createClient({
 
 // Helper function to fetch blog posts with pagination
 export async function getBlogPosts(limit = 3, start = 0) {
-  const query = `*[_type in ["blogPost", "post"]] | order(publishedAt desc) [${start}...${start + limit}] {
+  const query = `*[_type == "blog"] | order(publishedAt desc) [${start}...${start + limit}] {
     _id,
     title,
     slug,
@@ -20,8 +20,7 @@ export async function getBlogPosts(limit = 3, start = 0) {
         _id,
         url
       }
-    },
-    categories[]
+    }
   }`;
 
   return await client.fetch(query);
@@ -29,7 +28,7 @@ export async function getBlogPosts(limit = 3, start = 0) {
 
 // Helper function to fetch a single blog post by slug
 export async function getBlogPostBySlug(slug) {
-  const query = `*[(_type == "blogPost" || _type == "post") && slug.current == $slug][0] {
+  const query = `*[_type == "blog" && slug.current == $slug][0] {
     _id,
     title,
     slug,
@@ -41,8 +40,7 @@ export async function getBlogPostBySlug(slug) {
         url
       }
     },
-    body,
-    categories[]
+    body
   }`;
 
   return await client.fetch(query, { slug });
@@ -54,18 +52,16 @@ export async function getProjects(limit = 6, start = 0) {
     _id,
     title,
     slug,
-    description,
+    excerpt,
     mainImage {
       asset->{
         _id,
         url
       }
     },
-    tags,
-    challenges,
-    solutions,
-    link,
-    publishedAt
+    publishedAt,
+    repoUrl,
+    liveUrl
   }`;
 
   return await client.fetch(query);
@@ -77,18 +73,17 @@ export async function getProjectBySlug(slug) {
     _id,
     title,
     slug,
-    description,
+    excerpt,
     mainImage {
       asset->{
         _id,
         url
       }
     },
-    tags,
-    challenges,
-    solutions,
-    link,
-    publishedAt
+    body,
+    publishedAt,
+    repoUrl,
+    liveUrl
   }`;
 
   return await client.fetch(query, { slug });

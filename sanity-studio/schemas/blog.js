@@ -1,9 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-// Schema for projects in Sanity Studio
 export default defineType({
-  name: 'project',
-  title: 'Project',
+  name: 'blog',
+  title: 'Blog',
   type: 'document',
   fields: [
     defineField({
@@ -35,7 +34,7 @@ export default defineType({
       name: 'excerpt',
       title: 'Texto corto',
       type: 'text',
-      description: 'Un resumen breve del proyecto',
+      description: 'Un resumen breve del blog post',
       validation: (Rule) => Rule.max(300).required(),
     }),
     defineField({
@@ -49,18 +48,6 @@ export default defineType({
       title: 'Published at',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'repoUrl',
-      title: 'Repository URL',
-      type: 'url',
-      description: 'Link to project repository',
-    }),
-    defineField({
-      name: 'liveUrl',
-      title: 'Live Website URL',
-      type: 'url',
-      description: 'Link to live project website',
     }),
   ],
   preview: {

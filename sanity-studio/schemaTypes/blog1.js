@@ -1,16 +1,18 @@
+import {defineType, defineField, defineArrayMember} from 'sanity'
+
 // Schema for blog posts in Sanity Studio
-export default {
+export default defineType({
   name: 'blog1',
   title: 'Blog',
   type: 'document',
   fields: [
-    {
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -19,14 +21,14 @@ export default {
         maxLength: 96
       },
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
@@ -34,27 +36,27 @@ export default {
         hotspot: true
       },
       validation: Rule => Rule.required()
-    },
-    {
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Texto corto',
       type: 'text',
       description: 'Un resumen breve del blog post',
       validation: Rule => Rule.max(300).required()
-    },
-    {
+    }),
+    defineField({
       name: 'body',
       title: 'Contenido',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block'
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'image',
           options: { hotspot: true }
-        },
-        {
+        }),
+        defineArrayMember({
           type: 'code',
           title: 'Code Block',
           options: {
@@ -70,10 +72,10 @@ export default {
               { title: 'Bash', value: 'bash' }
             ]
           }
-        }
+        })
       ],
       validation: Rule => Rule.required()
-    }
+    })
   ],
   preview: {
     select: {
@@ -81,4 +83,4 @@ export default {
       media: 'mainImage'
     }
   }
-}; 
+}); 
