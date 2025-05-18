@@ -1,10 +1,12 @@
 import { createClient } from '@sanity/client';
 
 export const client = createClient({
-  projectId: '6704b0nj', // Your project ID
+  projectId: '6704b0nj', // Tu ID de proyecto
   dataset: 'production',
-  useCdn: true, // Cache results from the CDN
-  apiVersion: '2023-05-03', // Use the latest API version
+  useCdn: true, // Obtener resultados de la CDN
+  apiVersion: 'v2022-06-01', // Usar la versión de API más reciente
+  // Token hardcoded temporalmente para pruebas
+  token: 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5'
 });
 
 // Helper function to fetch blog posts with pagination
