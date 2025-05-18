@@ -38,11 +38,50 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Texto corto',
+      name: 'description',
+      title: 'Description',
       type: 'text',
-      description: 'Un resumen breve del proyecto',
+      description: 'A brief summary of the project',
       validation: Rule => Rule.max(300).required()
+    }),
+    defineField({
+      name: 'detailedDescription',
+      title: 'Detailed Description',
+      type: 'text',
+      description: 'A more detailed description about the project'
+    }),
+    defineField({
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags'
+      }
+    }),
+    defineField({
+      name: 'technologies',
+      title: 'Technologies',
+      description: 'Technologies and tools used in this project (e.g., React, Firebase, PHP)',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags'
+      }
+    }),
+    defineField({
+      name: 'challenges',
+      title: 'Challenges',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of challenges faced during the project'
+    }),
+    defineField({
+      name: 'solutions',
+      title: 'Solutions',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'List of solutions implemented'
     }),
     defineField({
       name: 'body',
@@ -77,16 +116,16 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
-      name: 'repoUrl',
-      title: 'Repository URL',
-      type: 'url',
-      description: 'Link to project repository'
-    }),
-    defineField({
-      name: 'liveUrl',
-      title: 'Live Website URL',
+      name: 'link',
+      title: 'Project Link',
       type: 'url',
       description: 'Link to live project website'
+    }),
+    defineField({
+      name: 'repositoryLink',
+      title: 'Repository Link',
+      type: 'url',
+      description: 'Link to project repository (GitHub, GitLab, etc.)'
     })
   ],
   preview: {

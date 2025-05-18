@@ -3,6 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function ProjectDetail({ project, isOpen, onClose }) {
   if (!project) return null;
 
+  // Log the project data to check what we're receiving
+  console.log('Project Detail:', project);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -68,6 +71,23 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                 </p>
               </div>
 
+              {/* Technologies Section */}
+              {project.technologies && project.technologies.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-3xl font-squada text-white mb-4">TECHNOLOGIES</h3>
+                  <div className="flex flex-wrap gap-3">
+                    {project.technologies.map((tech, index) => (
+                      <span 
+                        key={index} 
+                        className="px-4 py-2 text-base rounded-md bg-purple-800/30 text-purple-300 border border-purple-700/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
                   <h3 className="text-3xl font-squada text-white mb-4">CHALLENGES</h3>
@@ -103,18 +123,29 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                 </div>
               </div>
 
-              {project.link && (
-                <div className="flex justify-center">
+              <div className="flex flex-wrap justify-center gap-4 mt-8">
+                {project.link && (
                   <a 
                     href={project.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="px-6 py-3 bg-purple-700 text-white text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
                   >
-                    VIEW PROJECT
+                    VIEW WEBSITE
                   </a>
-                </div>
-              )}
+                )}
+                
+                {project.repositoryLink && (
+                  <a 
+                    href={project.repositoryLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-zinc-800 text-white text-xl font-semibold rounded-lg hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect"
+                  >
+                    VIEW REPOSITORY
+                  </a>
+                )}
+              </div>
             </div>
           </motion.div>
         </motion.div>

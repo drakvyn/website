@@ -54,16 +54,18 @@ export async function getProjects(limit = 6, start = 0) {
     _id,
     title,
     slug,
-    excerpt,
+    description,
     mainImage {
       asset->{
         _id,
         url
       }
     },
+    tags,
+    technologies,
     publishedAt,
-    repoUrl,
-    liveUrl
+    link,
+    repositoryLink
   }`;
 
   return await client.fetch(query);
@@ -75,7 +77,8 @@ export async function getProjectBySlug(slug) {
     _id,
     title,
     slug,
-    excerpt,
+    description,
+    detailedDescription,
     mainImage {
       asset->{
         _id,
@@ -83,9 +86,13 @@ export async function getProjectBySlug(slug) {
       }
     },
     body,
+    tags,
+    technologies,
+    challenges,
+    solutions,
     publishedAt,
-    repoUrl,
-    liveUrl
+    link,
+    repositoryLink
   }`;
 
   return await client.fetch(query, { slug });

@@ -27,6 +27,12 @@ export default {
       validation: Rule => Rule.required()
     },
     {
+      name: 'detailedDescription',
+      title: 'Detailed Description',
+      type: 'text',
+      description: 'A more detailed description about the project'
+    },
+    {
       name: 'mainImage',
       title: 'Main Image',
       type: 'image',
@@ -38,6 +44,16 @@ export default {
     {
       name: 'tags',
       title: 'Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags'
+      }
+    },
+    {
+      name: 'technologies',
+      title: 'Technologies',
+      description: 'Technologies and tools used in this project (e.g., React, Firebase, PHP)',
       type: 'array',
       of: [{ type: 'string' }],
       options: {
@@ -62,7 +78,13 @@ export default {
       name: 'link',
       title: 'Project Link',
       type: 'url',
-      description: 'Link to live project or repository'
+      description: 'Link to live project website'
+    },
+    {
+      name: 'repositoryLink',
+      title: 'Repository Link',
+      type: 'url',
+      description: 'Link to project repository (GitHub, GitLab, etc.)'
     },
     {
       name: 'publishedAt',
