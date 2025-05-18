@@ -196,11 +196,6 @@ function ProjectCard({ project, index, onClick }) {
                     backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[#12131c] via-transparent to-purple-700/30 opacity-70 transition-opacity duration-300 hover:opacity-40" />
-                
-                {/* Purple Accent Edge */}
-                <div className="absolute top-0 right-0 w-1 h-full bg-purple-700 opacity-80"></div>
-                <div className="absolute top-0 right-0 w-[30%] h-1 bg-purple-700 opacity-80"></div>
                 
                 {/* Mobile close button */}
                 {isMobile && (
