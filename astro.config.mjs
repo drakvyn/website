@@ -10,7 +10,7 @@ export default defineConfig({
   vite: {
     // Define variables que estarán disponibles en el código cliente
     define: {
-      'import.meta.env.SANITY_TOKEN': JSON.stringify(process.env.SANITY_TOKEN || '')
+      'import.meta.env.NEXT_PUBLIC_SANITY_TOKEN': JSON.stringify(process.env.NEXT_PUBLIC_SANITY_TOKEN || '')
     },
     // Evita que las variables de entorno se expongan en la compilación
     build: {

@@ -1,0 +1,15 @@
+{
+  "origins": [
+    "http://localhost:3000",
+    "http://localhost:4321",
+    "https://new.jeanroa.dev",
+    "https://jeanroa.dev"
+  ],
+  "allowCredentials": false,
+  "headers": [
+    "Authorization",
+    "Content-Type",
+    "Origin",
+    "X-Requested-With"
+  ]
+} 

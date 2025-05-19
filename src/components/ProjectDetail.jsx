@@ -62,21 +62,19 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                 ))}
               </div>
 
-              <p className="text-zinc-300 text-lg mb-8">{project.description}</p>
-
               <div className="mb-8">
                 <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
-                <p className="text-zinc-400">
-                  {project.detailedDescription || "This project was built with a focus on user experience and performance. The main goal was to create an intuitive interface that provides a smooth and engaging experience while maintaining optimal loading times and responsiveness."}
+                <p className="text-zinc-300 text-lg mb-8">
+                  {project.description || "Failed to load description"}
                 </p>
               </div>
 
               {/* Technologies Section */}
-              {project.technologies && project.technologies.length > 0 && (
+              {project.tags && project.tags.length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-3xl font-squada text-white mb-4">TECHNOLOGIES</h3>
                   <div className="flex flex-wrap gap-3">
-                    {project.technologies.map((tech, index) => (
+                    {project.tags.map((tech, index) => (
                       <span 
                         key={index} 
                         className="px-4 py-2 text-base rounded-md bg-purple-800/30 text-purple-300 border border-purple-700/30"

@@ -6,3 +6,11 @@
   NODE_VERSION = "20"
   # Deshabilitar el escaneo de secretos
   SECRETS_SCAN_ENABLED = "false" 
+
+# Configuración de encabezados CORS para solicitudes hacia Sanity
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Origin, X-Requested-With, Content-Type, Accept, Authorization" 

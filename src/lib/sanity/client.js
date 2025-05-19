@@ -1,15 +1,17 @@
 import { createClient } from '@sanity/client';
 
-// Definimos el token en una constante que luego puede ser reemplazada
-// por una variable de entorno en producción
-const SANITY_TOKEN = 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5';
+// Definimos el token teniendo en cuenta el entorno (desarrollo o producción)
+// Usar la variable de entorno que ya está configurada en Netlify
+const SANITY_TOKEN = import.meta.env.NEXT_PUBLIC_SANITY_TOKEN || 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5';
 
 export const client = createClient({
   projectId: '6704b0nj', // Tu ID de proyecto
   dataset: 'production',
   useCdn: false, // Cambiado a false para siempre obtener los datos más recientes
   apiVersion: '2022-06-01', // Usar la versión de API más reciente
-  token: SANITY_TOKEN
+  token: SANITY_TOKEN,
+  withCredentials: false, // Importante para CORS
+  cors: true, // Habilitar CORS explícitamente
 });
 
 // Helper function to fetch blog posts with pagination
