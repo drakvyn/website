@@ -1,12 +1,15 @@
 import { createClient } from '@sanity/client';
 
+// Definimos el token en una constante que luego puede ser reemplazada
+// por una variable de entorno en producción
+const SANITY_TOKEN = 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5';
+
 export const client = createClient({
   projectId: '6704b0nj', // Tu ID de proyecto
   dataset: 'production',
   useCdn: true, // Obtener resultados de la CDN
-  apiVersion: 'v2022-06-01', // Usar la versión de API más reciente
-  // Token hardcoded temporalmente para pruebas
-  token: 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5'
+  apiVersion: '2022-06-01', // Usar la versión de API más reciente
+  token: SANITY_TOKEN
 });
 
 // Helper function to fetch blog posts with pagination

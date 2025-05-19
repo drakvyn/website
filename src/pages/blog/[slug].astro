@@ -1,0 +1,144 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getBlogPosts, getBlogPostBySlug } from '../../lib/sanity/client';
+import { PortableText } from '@portabletext/react';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
+// Recuperar todos los slugs para poder generar páginas estáticas
+export async function getStaticPaths() {
+  const posts = await getBlogPosts(100, 0);
+  return posts.map(post => ({
+    params: { slug: post.slug.current },
+    props: { post },
+  }));
+}
+
+// Si es una página dinámica, obtener los datos
+const { slug } = Astro.params;
+let { post } = Astro.props;
+
+// Si no tenemos el post completo (como cuando accedemos directamente a la URL), obtenlo
+if (!post || !post.body) {
+  post = await getBlogPostBySlug(slug);
+}
+
+// Formatear la fecha
+const formattedDate = post && post.publishedAt ? 
+  format(new Date(post.publishedAt), "dd 'de' MMMM, yyyy", { locale: es }) : 
+  '';
+---
+
+<Layout title={post ? `${post.title} - Jean Roa` : 'Blog Post - Jean Roa'}>
+  {post ? (
+    <article class="container mx-auto px-4 py-12 md:py-20">
+      <div class="max-w-4xl mx-auto">
+        {post.mainImage && post.mainImage.asset && (
+          <div class="w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden mb-8 md:mb-12">
+            <img 
+              src={post.mainImage.asset.url} 
+              alt={post.title}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        
+        <div class="mb-6 md:mb-8">
+          <h1 class="font-squada text-white text-4xl md:text-6xl mb-4 tracking-wide">{post.title}</h1>
+          <div class="flex items-center text-zinc-400">
+            <span>{formattedDate}</span>
+          </div>
+        </div>
+        
+        <div class="prose prose-invert prose-lg max-w-none">
+          {post.body && typeof window !== 'undefined' && (
+            <PortableText value={post.body} />
+          )}
+          {!post.body && (
+            <p class="text-zinc-400">Este artículo no tiene contenido disponible.</p>
+          )}
+        </div>
+        
+        <div class="mt-12 md:mt-16">
+          <a href="/blog" class="text-purple-500 hover:text-purple-400 transition-colors font-medium">
+            ← Volver a todos los artículos
+          </a>
+        </div>
+      </div>
+    </article>
+  ) : (
+    <div class="container mx-auto px-4 py-20 text-center">
+      <h1 class="font-squada text-white text-5xl mb-6">Artículo no encontrado</h1>
+      <p class="text-zinc-400 mb-8">Lo sentimos, no pudimos encontrar el artículo que buscas.</p>
+      <a href="/blog" class="inline-block px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition-colors">
+        Volver al blog
+      </a>
+    </div>
+  )}
+</Layout>
+
+<style>
+  /* Estilos para el contenido del blog (PortableText) */
+  :global(.prose h2) {
+    font-family: 'Squada One', sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  :global(.prose h3) {
+    font-family: 'Squada One', sans-serif;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+  }
+  
+  :global(.prose p) {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+  
+  :global(.prose a) {
+    color: #8b5cf6;
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+  
+  :global(.prose a:hover) {
+    color: #a78bfa;
+  }
+  
+  :global(.prose ul) {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  :global(.prose ol) {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  :global(.prose img) {
+    border-radius: 0.5rem;
+    margin: 2rem 0;
+  }
+  
+  :global(.prose pre) {
+    background-color: #1e1e2e;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  
+  :global(.prose code) {
+    color: #a78bfa;
+    background-color: #1e1e2e;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+</style> 
