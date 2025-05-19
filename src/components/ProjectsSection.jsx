@@ -51,9 +51,6 @@ function ProjectCard({ project, index, onClick }) {
     hover: { scale: 1.05, transition: { duration: 0.3 } }
   };
 
-  // Split the title into individual characters for animation
-  const titleChars = project.title.toUpperCase().split('');
-
   // Función para gestionar el toque en móvil (similar a hover en desktop)
   const handleTouch = () => {
     if (isMobile) {
@@ -96,15 +93,7 @@ function ProjectCard({ project, index, onClick }) {
             viewport={{ once: true }}
           >
             <span className="flex flex-wrap text-overlay">
-              {titleChars.map((char, i) => (
-                <span 
-                  key={i}
-                  className="text-wave-animation inline-block"
-                  style={{ '--char-index': i }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
+              {project.title.toUpperCase()}
             </span>
           </motion.h3>
           
