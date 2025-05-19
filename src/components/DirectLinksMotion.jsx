@@ -15,17 +15,14 @@ export default function DirectLinksMotion() {
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.7, type: 'spring', stiffness: 60 }}
-        whileHover={{ 
-          scale: 1.02, 
-          boxShadow: '0 8px 32px 0 rgba(80,0,120,0.15)',
-          transition: { duration: 0.2 }
-        }}
       >
-        <h2 className="font-squada mb-2 tracking-wide text-4xl md:text-5xl">DIRECT LINKS</h2>
+        <h2 className="font-squada mb-2 tracking-wide text-4xl md:text-5xl">
+          <span className="text-overlay">DIRECT LINKS</span>
+        </h2>
         <div className="flex-1"></div>
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between w-full gap-4 md:gap-0">
           <motion.a 
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            href="#"
             target="_blank"
             className="border-2 border-[#1F1B24] text-[#1F1B24] px-[15px] py-[10px] rounded-[5px] text-sm md:text-base font-manrope font-semibold text-center w-full md:w-fit hover:bg-[#1F1B24] hover:text-white transition-all duration-200" 
             style={{ background: 'none' }}
@@ -37,7 +34,7 @@ export default function DirectLinksMotion() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            DOWNLOAD RESUME
+            <span className="text-overlay">DOWNLOAD RESUME</span>
           </motion.a>
           <div className="flex gap-4">
             <motion.a 
@@ -65,6 +62,32 @@ export default function DirectLinksMotion() {
               whileTap={{ scale: 0.9 }}
             >
               <img src="/images/BUTTON-LK.svg" alt="LinkedIn" className="w-8 h-8 md:w-10 md:h-10" />
+            </motion.a>
+            <motion.a 
+              href="https://discord.com/users/thesoftwarewizard" 
+              target="_blank" 
+              aria-label="Discord" 
+              className="flex items-center justify-center"
+              whileHover={{ 
+                scale: 1.2,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <img src="/images/BUTTON-DS.svg" alt="Discord" className="w-8 h-8 md:w-10 md:h-10" />
+            </motion.a>
+            <motion.a 
+              href="https://t.me/thesoftwarewizard" 
+              target="_blank" 
+              aria-label="Telegram" 
+              className="flex items-center justify-center"
+              whileHover={{ 
+                scale: 1.2,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <img src="/images/BUTTON-TL.svg" alt="Telegram" className="w-8 h-8 md:w-10 md:h-10" />
             </motion.a>
           </div>
         </div>

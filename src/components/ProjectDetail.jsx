@@ -61,26 +61,38 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
               style={{ backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})` }}>
               <div className="absolute inset-0 bg-gradient-to-t from-[#181924] to-transparent" />
               <div className="absolute bottom-0 left-0 p-8">
-                <h2 className="text-6xl font-squada text-white tracking-wide uppercase">{project.title}</h2>
+                <h2 className="text-6xl font-squada text-white tracking-wide uppercase">
+                  <span className="text-overlay">
+                    {project.title}
+                  </span>
+                </h2>
               </div>
             </div>
 
             <div className="p-8">
               <div className="flex flex-wrap gap-3 mb-6">
-                {project.tags && project.tags.map((tag, index) => (
-                  <span 
-                    key={index} 
-                    className="px-3 py-1 text-md rounded-full bg-[#12131c] text-zinc-400"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <div className="mb-2">
+                  <span className="text-md md:text-md text-zinc-400 font-manrope tracking-wider uppercase">Used Technologies</span>
+                </div>
+                <div className="flex flex-wrap gap-2 md:gap-3 bg-white p-3 rounded-lg relative w-full">
+                  <div className="absolute inset-0 bg-white rounded-lg text-overlay"></div>
+                  {project.tags && project.tags.map((tag, index) => (
+                    <span 
+                      key={index} 
+                      className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-black font-manrope tracking-wide relative z-10"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               <div className="mb-8">
                 {project.detailedDescription && (
                   <div className="mt-6">
-                    <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
+                    <h3 className="text-3xl font-squada text-white mb-4">
+                      <span className="text-overlay">PROJECT DETAILS</span>
+                    </h3>
                     <p className="text-zinc-300 text-lg mb-4">
                       {project.detailedDescription}
                     </p>
@@ -90,7 +102,9 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
-                  <h3 className="text-3xl font-squada text-white mb-4">CHALLENGES</h3>
+                  <h3 className="text-3xl font-squada text-white mb-4">
+                    <span className="text-overlay">CHALLENGES</span>
+                  </h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
                     {project.challenges && project.challenges.length > 0 ? 
                       project.challenges.map((challenge, index) => (
@@ -101,7 +115,9 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-squada text-white mb-4">SOLUTIONS</h3>
+                  <h3 className="text-3xl font-squada text-white mb-4">
+                    <span className="text-overlay">SOLUTIONS</span>
+                  </h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
                     {project.solutions && project.solutions.length > 0 ? 
                       project.solutions.map((solution, index) => (
@@ -119,9 +135,9 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                     href={project.link} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-purple-700 text-white text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
+                    className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
                   >
-                    VIEW WEBSITE
+                    <span className="relative z-10 text-overlay">VIEW WEBSITE</span>
                   </a>
                 )}
                 
@@ -130,9 +146,9 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                     href={project.repositoryLink} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-zinc-800 text-white text-xl font-semibold rounded-lg hover:bg-zinc-700 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect"
+                    className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
                   >
-                    VIEW REPOSITORY
+                    <span className="relative z-10 text-overlay">VIEW REPOSITORY</span>
                   </a>
                 )}
               </div>

@@ -6,7 +6,6 @@ import './directlinks-overlay.css';
 import './projects.css';
 
 function ProjectCard({ project, index, onClick }) {
-  const [hovered, setHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
   // Check if we're on mobile
@@ -47,15 +46,7 @@ function ProjectCard({ project, index, onClick }) {
   
   const imageVariants = {
     initial: { scale: 0.8, opacity: 0 },
-    animate: { scale: 1, opacity: 1, transition: { duration: 0.5 } },
-    hover: { scale: 1.05, transition: { duration: 0.3 } }
-  };
-
-  // Función para gestionar el toque en móvil (similar a hover en desktop)
-  const handleTouch = () => {
-    if (isMobile) {
-      setHovered(!hovered);
-    }
+    animate: { scale: 1, opacity: 1, transition: { duration: 0.5 } }
   };
 
   // Mobile image styles
@@ -77,51 +68,35 @@ function ProjectCard({ project, index, onClick }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      onMouseEnter={() => !isMobile && setHovered(true)}
-      onMouseLeave={() => !isMobile && setHovered(false)}
       onClick={() => onClick(project)}
     >
       <div className="flex flex-col md:flex-row w-full cursor-pointer relative min-h-[300px] md:min-h-[500px]">
         {/* Left side - Text Content */}
-        <div className="w-full md:w-7/12 pr-0 md:pr-12 mb-8 md:mb-0 z-10 relative">
-          <motion.h3 
-            className="text-3xl sm:text-4xl md:text-7xl xl:text-8xl font-squada text-white mb-4 md:mb-8 tracking-tight leading-none project-text-animate"
-            initial="initial"
-            whileInView="animate"
-            exit="exit"
-            variants={titleVariants}
-            viewport={{ once: true }}
-          >
-            <span className="flex flex-wrap text-overlay">
-              {project.title.toUpperCase()}
-            </span>
-          </motion.h3>
-          
-          <div className="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
-            {project.tags && project.tags.map((tag, i) => (
-              <motion.span 
-                key={i}
-                className="px-2 py-1 md:px-4 md:py-2 text-sm md:text-lg bg-[#181924]/70 text-zinc-300 rounded-full"
-                variants={tagVariants}
-                initial="initial"
-                whileInView="animate"
-                custom={i}
-                viewport={{ once: true }}
-              >
-                {tag}
-              </motion.span>
-            ))}
+        <div className="w-full md:w-7/12 pr-0 md:pr-12 mb-8 md:mb-0 z-10 relative flex flex-col justify-between h-[500px]">
+          <div>
+            <motion.h3 
+              className="text-3xl sm:text-4xl md:text-7xl xl:text-8xl font-squada text-white mb-4 md:mb-8 tracking-tight leading-none project-text-animate"
+              initial="initial"
+              whileInView="animate"
+              exit="exit"
+              variants={titleVariants}
+              viewport={{ once: true }}
+            >
+              <span className="flex flex-wrap text-overlay">
+                {project.title.toUpperCase()}
+              </span>
+            </motion.h3>
+            
+            <motion.p 
+              className="text-base md:text-xl text-zinc-300 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              {project.description}
+            </motion.p>
           </div>
-          
-          <motion.p 
-            className="text-base md:text-xl text-zinc-300 max-w-2xl mb-4 md:mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            {project.description}
-          </motion.p>
 
           {/* Mobile image - shown below content */}
           {isMobile && (
@@ -129,7 +104,8 @@ function ProjectCard({ project, index, onClick }) {
               className="w-full h-[250px] overflow-hidden rounded-2xl project-image-container mb-8"
               variants={imageVariants}
               initial="initial"
-              animate="animate"
+              whileInView="animate"
+              viewport={{ once: true }}
             >
               <div 
                 className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
@@ -137,20 +113,30 @@ function ProjectCard({ project, index, onClick }) {
                   backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
                 }}
               />
-              
-              {/* Image Highlight Effect */}
-              <motion.div 
-                className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0"
-                initial={{ opacity: 0, rotate: -45, scale: 1.5 }}
-                animate={{ opacity: [0, 1, 0], rotate: -45, scale: 1.5, x: ['100%', '-100%'] }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity, 
-                  repeatDelay: 2
-                }}
-              />
             </motion.div>
           )}
+
+          <div>
+            <div className="mb-2">
+              <span className="text-md md:text-md text-zinc-400 font-manrope tracking-wider uppercase">Used Technologies</span>
+            </div>
+            <div className="flex flex-wrap gap-2 md:gap-3 bg-white p-3 rounded-lg relative">
+              <div className="absolute inset-0 bg-white rounded-lg text-overlay"></div>
+              {project.tags && project.tags.map((tag, i) => (
+                <motion.span 
+                  key={i}
+                  className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-black font-manrope tracking-wide relative z-10"
+                  variants={tagVariants}
+                  initial="initial"
+                  whileInView="animate"
+                  custom={i}
+                  viewport={{ once: true }}
+                >
+                  {tag}
+                </motion.span>
+              ))}
+            </div>
+          </div>
         </div>
         
         {/* Right side - Image container for desktop */}
@@ -158,39 +144,22 @@ function ProjectCard({ project, index, onClick }) {
           {/* This is an invisible placeholder to maintain the height on desktop */}
           <div className="image-placeholder w-full h-0 md:h-[500px] md:block hidden" />
           
-          {/* Desktop image - only visible on hover */}
+          {/* Desktop image - visible on scroll */}
           {!isMobile && (
-            <AnimatePresence>
-              {hovered && (
-                <motion.div 
-                  className="w-full h-[500px] absolute top-0 right-0 overflow-hidden rounded-2xl project-image-container"
-                  variants={imageVariants}
-                  initial="initial"
-                  animate="animate"
-                  whileHover="hover"
-                  exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
-                >
-                  <div 
-                    className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
-                    style={{ 
-                      backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
-                    }}
-                  />
-                  
-                  {/* Image Highlight Effect */}
-                  <motion.div 
-                    className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0"
-                    initial={{ opacity: 0, rotate: -45, scale: 1.5 }}
-                    animate={{ opacity: [0, 1, 0], rotate: -45, scale: 1.5, x: ['100%', '-100%'] }}
-                    transition={{ 
-                      duration: 1.5, 
-                      repeat: Infinity, 
-                      repeatDelay: 2
-                    }}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <motion.div 
+              className="w-full h-[500px] absolute top-0 right-0 overflow-hidden rounded-2xl project-image-container"
+              variants={imageVariants}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+            >
+              <div 
+                className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
+                style={{ 
+                  backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
+                }}
+              />
+            </motion.div>
           )}
         </div>
       </div>
@@ -321,9 +290,9 @@ export default function ProjectsSection() {
         >
           <a 
             href="/projects" 
-            className="inline-block px-6 py-3 md:px-10 md:py-5 bg-purple-700 text-white text-xl md:text-2xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
+            className="inline-block px-6 py-3 md:px-10 md:py-5 bg-white text-black text-xl md:text-2xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
           >
-            <span className="relative z-10">VIEW ALL PROJECTS</span>
+            <span className="relative z-10 text-overlay">VIEW ALL PROJECTS</span>
           </a>
         </motion.div>
       </div>

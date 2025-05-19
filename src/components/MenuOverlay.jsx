@@ -63,7 +63,7 @@ export default function MenuOverlay({ open, onClose }) {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   onClick={onClose}
                 >
-                  {item.label}
+                  <span className="text-overlay">{item.label}</span>
                   <motion.div
                     className="absolute -bottom-2 left-0 w-0 h-0.5 bg-purple-500"
                     initial={{ width: 0 }}

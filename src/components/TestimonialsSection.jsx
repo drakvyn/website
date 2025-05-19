@@ -185,7 +185,9 @@ export default function TestimonialsSection() {
                   <div className="absolute inset-0 rounded-xl ring-2 ring-purple-700/50 ring-offset-2 ring-offset-[#181924]"></div>
                 </div>
                 <div className="text-center md:text-left">
-                  <h3 className="text-2xl font-squada text-white mb-2">{testimonials[currentIndex].name}</h3>
+                  <h3 className="text-2xl font-squada text-white mb-2">
+                    <span className="text-overlay">{testimonials[currentIndex].name}</span>
+                  </h3>
                   <p className="text-purple-400">{testimonials[currentIndex].position}</p>
                 </div>
               </div>

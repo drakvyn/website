@@ -213,7 +213,7 @@ export default function ServicesSection() {
               onMouseLeave={() => setHoveredService(null)}
             >
               <div 
-                className={`p-6 sm:p-8 md:p-12 rounded-xl transition-all duration-500 ${
+                className={`p-6 sm:p-8 md:p-12 rounded-xl transition-all duration-500 h-[280px] flex flex-col ${
                   hoveredService === service.id 
                     ? 'bg-[#181924] transform scale-[1.02]' 
                     : 'bg-transparent'
@@ -227,10 +227,12 @@ export default function ServicesSection() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    {service.title}
+                    <span className="text-overlay">
+                      {service.title}
+                    </span>
                   </motion.span>
                 </h3>
-                <p className={`text-base sm:text-lg transition-colors duration-300 ${
+                <p className={`text-base sm:text-lg transition-colors duration-300 flex-grow ${
                   hoveredService === service.id ? 'text-zinc-300' : 'text-zinc-400'
                 }`}>
                   {service.description}
