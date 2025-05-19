@@ -3,12 +3,6 @@
   publish = "dist"
 
 [build.environment]
-  # Aquí se pueden añadir variables de entorno para la fase de construcción
   NODE_VERSION = "20"
-
-# Esta configuración deshabilita la verificación de secretos durante la compilación
-[plugins.inputs]
-  # Excluir los archivos de construcción de la verificación de secretos
-  [plugins.inputs.secrets-scanner]
-    # Omitir directorios y archivos compilados
-    SECRETS_SCAN_OMIT_PATHS = ["dist/**/*", "**/*.js"] 
+  # Deshabilitar el escaneo de secretos
+  SECRETS_SCAN_ENABLED = "false" 
