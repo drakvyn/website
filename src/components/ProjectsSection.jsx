@@ -133,79 +133,76 @@ function ProjectCard({ project, index, onClick }) {
           >
             {project.description}
           </motion.p>
-        </div>
-        
-        {/* Right side - Image container with fixed height */}
-        <div className="w-full md:w-5/12 h-0 min-h-0 md:min-h-[500px] md:h-[500px] absolute md:relative right-0 top-0">
-          {/* This is an invisible placeholder to maintain the height on desktop */}
-          <div className="image-placeholder w-full h-0 md:h-[500px] md:block hidden" />
-          
-          {/* Mobile image preview button (thumbnail) */}
-          {isMobile && !hovered && (
-            <div 
-              className="absolute top-0 right-0 w-[80px] h-[80px] rounded-lg overflow-hidden opacity-80 shadow-lg hidden"
-              onClick={(e) => {
-                e.stopPropagation();
-                setHovered(true);
-              }}
+
+          {/* Mobile image - shown below content */}
+          {isMobile && (
+            <motion.div 
+              className="w-full h-[250px] overflow-hidden rounded-2xl project-image-container mb-8"
+              variants={imageVariants}
+              initial="initial"
+              animate="animate"
             >
               <div 
-                className="w-full h-full bg-cover bg-center"
+                className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
                 style={{ 
                   backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
                 }}
               />
-            </div>
-          )}
-          
-          {/* On mobile, show below content, on desktop show on right */}
-          <AnimatePresence>
-            {hovered && (
+              
+              {/* Image Highlight Effect */}
               <motion.div 
-                className="w-full h-[300px] md:h-[500px] absolute md:top-0 md:right-0 overflow-hidden rounded-2xl project-image-container"
-                style={mobileImageStyles}
-                variants={imageVariants}
-                initial="initial"
-                animate="animate"
-                whileHover="hover"
-                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
-              >
-                <div 
-                  className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
-                  style={{ 
-                    backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
-                  }}
-                />
-                
-                {/* Mobile close button */}
-                {isMobile && (
-                  <button 
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 flex items-center justify-center z-30"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setHovered(false);
-                    }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
-                
-                {/* Image Highlight Effect */}
+                className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0"
+                initial={{ opacity: 0, rotate: -45, scale: 1.5 }}
+                animate={{ opacity: [0, 1, 0], rotate: -45, scale: 1.5, x: ['100%', '-100%'] }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  repeatDelay: 2
+                }}
+              />
+            </motion.div>
+          )}
+        </div>
+        
+        {/* Right side - Image container for desktop */}
+        <div className="w-full md:w-5/12 h-0 min-h-0 md:min-h-[500px] md:h-[500px] absolute md:relative right-0 top-0">
+          {/* This is an invisible placeholder to maintain the height on desktop */}
+          <div className="image-placeholder w-full h-0 md:h-[500px] md:block hidden" />
+          
+          {/* Desktop image - only visible on hover */}
+          {!isMobile && (
+            <AnimatePresence>
+              {hovered && (
                 <motion.div 
-                  className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0"
-                  initial={{ opacity: 0, rotate: -45, scale: 1.5 }}
-                  animate={{ opacity: [0, 1, 0], rotate: -45, scale: 1.5, x: ['100%', '-100%'] }}
-                  transition={{ 
-                    duration: 1.5, 
-                    repeat: Infinity, 
-                    repeatDelay: 2
-                  }}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  className="w-full h-[500px] absolute top-0 right-0 overflow-hidden rounded-2xl project-image-container"
+                  variants={imageVariants}
+                  initial="initial"
+                  animate="animate"
+                  whileHover="hover"
+                  exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }}
+                >
+                  <div 
+                    className="w-full h-full bg-cover bg-center transition-transform duration-700 project-image"
+                    style={{ 
+                      backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
+                    }}
+                  />
+                  
+                  {/* Image Highlight Effect */}
+                  <motion.div 
+                    className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0"
+                    initial={{ opacity: 0, rotate: -45, scale: 1.5 }}
+                    animate={{ opacity: [0, 1, 0], rotate: -45, scale: 1.5, x: ['100%', '-100%'] }}
+                    transition={{ 
+                      duration: 1.5, 
+                      repeat: Infinity, 
+                      repeatDelay: 2
+                    }}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          )}
         </div>
       </div>
       

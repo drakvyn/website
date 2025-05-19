@@ -69,16 +69,18 @@ function ParticlesBackground() {
     // Initialize particles
     const initParticles = () => {
       particles = [];
-      const particleCount = Math.floor(canvas.width / 15); // Adjust according to desired density
+      // Reduce particle count on mobile devices
+      const isMobile = window.innerWidth < 768;
+      const particleCount = Math.floor(canvas.width / (isMobile ? 25 : 15));
       
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          radius: Math.random() * 2 + 0.5,
+          radius: Math.random() * (isMobile ? 1.5 : 2) + 0.5,
           color: `rgba(126, 34, 206, ${Math.random() * 0.4 + 0.1})`,
-          speedX: Math.random() * 0.5 - 0.25,
-          speedY: Math.random() * 0.5 - 0.25
+          speedX: Math.random() * (isMobile ? 0.3 : 0.5) - 0.25,
+          speedY: Math.random() * (isMobile ? 0.3 : 0.5) - 0.25
         });
       }
     };
@@ -153,7 +155,7 @@ function ParticlesBackground() {
   return (
     <canvas 
       ref={canvasRef} 
-      className="absolute inset-0 pointer-events-none opacity-40 z-0"
+      className="absolute inset-0 pointer-events-none opacity-30 sm:opacity-40 z-0"
     />
   );
 }
@@ -162,18 +164,18 @@ export default function ServicesSection() {
   const [hoveredService, setHoveredService] = useState(null);
 
   return (
-    <section className="py-24 w-full bg-[#0e0e16] relative overflow-hidden">
+    <section className="py-12 sm:py-16 md:py-24 w-full bg-[#0e0e16] relative overflow-hidden">
       <ParticlesBackground />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          className="mb-20"
+          className="mb-12 sm:mb-16 md:mb-20"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <h2 className="font-squada text-white relative text-8xl md:text-9xl tracking-wide">
+          <h2 className="font-squada text-white relative text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-wide">
             <motion.span 
               className="text-overlay inline-block"
               initial={{ clipPath: 'inset(100% 0 0 0)' }}
@@ -185,7 +187,7 @@ export default function ServicesSection() {
             </motion.span>
           </h2>
           <motion.p
-            className="text-lg text-zinc-400 mt-4 max-w-2xl"
+            className="text-base sm:text-lg text-zinc-400 mt-3 sm:mt-4 max-w-2xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -196,7 +198,7 @@ export default function ServicesSection() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-16"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12 md:gap-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -211,13 +213,13 @@ export default function ServicesSection() {
               onMouseLeave={() => setHoveredService(null)}
             >
               <div 
-                className={`p-8 md:p-12 rounded-xl transition-all duration-500 ${
+                className={`p-6 sm:p-8 md:p-12 rounded-xl transition-all duration-500 ${
                   hoveredService === service.id 
                     ? 'bg-[#181924] transform scale-[1.02]' 
                     : 'bg-transparent'
                 }`}
               >
-                <h3 className="font-squada text-white text-5xl md:text-6xl tracking-wide mb-8 relative">
+                <h3 className="font-squada text-white text-4xl sm:text-5xl md:text-6xl tracking-wide mb-6 sm:mb-8 relative">
                   <motion.span 
                     className="text-overlay inline-block animated-underline"
                     initial={{ clipPath: 'inset(100% 0 0 0)' }}
@@ -228,7 +230,7 @@ export default function ServicesSection() {
                     {service.title}
                   </motion.span>
                 </h3>
-                <p className={`text-lg transition-colors duration-300 ${
+                <p className={`text-base sm:text-lg transition-colors duration-300 ${
                   hoveredService === service.id ? 'text-zinc-300' : 'text-zinc-400'
                 }`}>
                   {service.description}

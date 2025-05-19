@@ -3,9 +3,9 @@ import './directlinks-overlay.css';
 
 export default function HeroMotion() {
   return (
-    <section className="flex flex-col justify-center min-h-[60vh] px-4 md:px-0">
+    <section className="flex flex-col justify-center px-4 md:px-0 min-h-[40vh] md:min-h-[60vh]">
       <motion.p
-        className="text-base md:text-lg lg:text-xl text-white font-manrope"
+        className="text-base md:text-lg lg:text-xl text-white font-manrope mb-4"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -15,7 +15,7 @@ export default function HeroMotion() {
       <motion.h1
         className="font-squada text-white relative tracking-tight md:tracking-normal"
         style={{ 
-          fontSize: 'clamp(3rem, 15vw, 12rem)', 
+          fontSize: 'clamp(2.5rem, 20vw, 12rem)', 
           lineHeight: '0.9',
           wordBreak: 'break-word'
         }}
