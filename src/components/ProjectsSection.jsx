@@ -274,34 +274,30 @@ export default function ProjectsSection() {
     setDetailOpen(false);
   };
 
-  // Placeholder projects for when we're loading or there's an error
-  const placeholderProjects = [
-    {
-      _id: '1',
-      title: 'Website',
-      slug: { current: 'ecommerce-website' },
-      description: 'A modern e-commerce platform with advanced filtering and smooth animations.',
-      mainImage: { asset: { url: 'https://media.licdn.com/dms/image/v2/D4E22AQF8IIc_heTIcg/feedshare-shrink_800/B4EZaRyJwyGYAg-/0/1746202566470?e=1750291200&v=beta&t=GhuAYakLolKmZSd2T6X5uf3xpMtZShPww-pb4t6FEz8' } },
-      tags: ['React', 'Node.js', 'MongoDB'],
-      challenges: ['Complex product filtering', 'Shopping cart implementation', 'Payment processing'],
-      solutions: ['Custom filter algorithm', 'Context API for state management', 'Stripe integration'],
-      link: 'https://example.com/ecommerce'
-    },
-    {
-      _id: '2',
-      title: 'Mobile App',
-      slug: { current: 'fitness-app' },
-      description: 'A comprehensive fitness tracking application with personalized workout plans.',
-      mainImage: { asset: { url: 'https://plus.unsplash.com/premium_photo-1682109363141-e6e95ad2d6b8?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' } },
-      tags: ['React Native', 'Firebase', 'Redux'],
-      challenges: ['User authentication', 'Real-time data sync', 'Background processes'],
-      solutions: ['JWT authentication', 'Firestore listeners', 'Background tasks'],
-      link: 'https://example.com/fitness'
-    },
-  ];
-
   // Use placeholders if loading or there's an error
-  const displayProjects = loading || error || projects.length === 0 ? placeholderProjects : projects;
+  const displayProjects = loading ? (
+    <div className="text-center py-12">
+      <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
+      <p className="text-zinc-400">Cargando proyectos...</p>
+    </div>
+  ) : error ? (
+    <div className="text-center text-red-500 mb-8">
+      {error}
+    </div>
+  ) : projects.length === 0 ? (
+    <div className="text-center text-zinc-400 mb-8">
+      No hay proyectos disponibles en este momento.
+    </div>
+  ) : (
+    projects.map((project, index) => (
+      <ProjectCard 
+        key={project._id} 
+        project={project}
+        index={index}
+        onClick={handleOpenDetail}
+      />
+    ))
+  );
 
   return (
     <section className="py-12 md:py-24 w-full bg-[#0e0e16] relative overflow-hidden">
@@ -335,21 +331,19 @@ export default function ProjectsSection() {
           </motion.p>
         </motion.div>
 
-        {error && (
-          <div className="text-center text-red-500 mb-8">
-            {error}
-          </div>
-        )}
-
         <div className="flex flex-col w-full">
-          {displayProjects.map((project, index) => (
-            <ProjectCard 
-              key={project._id} 
-              project={project}
-              index={index}
-              onClick={handleOpenDetail}
-            />
-          ))}
+          {loading || error || projects.length === 0 ? (
+            displayProjects
+          ) : (
+            projects.map((project, index) => (
+              <ProjectCard 
+                key={project._id} 
+                project={project}
+                index={index}
+                onClick={handleOpenDetail}
+              />
+            ))
+          )}
         </div>
 
         <motion.div 

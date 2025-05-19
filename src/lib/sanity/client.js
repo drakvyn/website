@@ -7,7 +7,7 @@ const SANITY_TOKEN = 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nw
 export const client = createClient({
   projectId: '6704b0nj', // Tu ID de proyecto
   dataset: 'production',
-  useCdn: true, // Obtener resultados de la CDN
+  useCdn: false, // Cambiado a false para siempre obtener los datos más recientes
   apiVersion: '2022-06-01', // Usar la versión de API más reciente
   token: SANITY_TOKEN
 });

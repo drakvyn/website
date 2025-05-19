@@ -107,21 +107,27 @@ export default function BlogSection() {
     fetchPosts();
   }, []);
 
-  // Placeholder posts for when we're loading or there's an error
-  const placeholderPosts = [
-    {
-      _id: '1',
-      title: 'Hardcoded blogpost',
-      slug: { current: 'hardcoded' },
-      publishedAt: new Date().toISOString(),
-      excerpt: 'This is a hardcoded blog post',
-      mainImage: { asset: { url: 'https://media.licdn.com/dms/image/v2/D4E22AQF8IIc_heTIcg/feedshare-shrink_800/B4EZaRyJwyGYAg-/0/1746202566470?e=1750291200&v=beta&t=GhuAYakLolKmZSd2T6X5uf3xpMtZShPww-pb4t6FEz8' } },
-      categories: ['Web Development', 'React']
-    },
-  ];
-
   // Use placeholders if loading or there's an error
-  const displayPosts = loading || error || posts.length === 0 ? placeholderPosts : posts;
+  const displayContent = loading ? (
+    <div className="text-center py-12">
+      <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
+      <p className="text-zinc-400">Cargando artículos...</p>
+    </div>
+  ) : error ? (
+    <div className="text-center text-red-500 mb-8">
+      {error}
+    </div>
+  ) : posts.length === 0 ? (
+    <div className="text-center text-zinc-400 mb-8">
+      No hay artículos disponibles en este momento.
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
+      {posts.map(post => (
+        <BlogCard key={post._id} post={post} />
+      ))}
+    </div>
+  );
 
   return (
     <section className="py-12 md:py-24 w-full bg-[#0e0e16]">
@@ -155,17 +161,7 @@ export default function BlogSection() {
           </motion.p>
         </motion.div>
 
-        {error && (
-          <div className="text-center text-red-500 mb-8">
-            {error}
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">
-          {displayPosts.map(post => (
-            <BlogCard key={post._id} post={post} />
-          ))}
-        </div>
+        {displayContent}
 
         <motion.div 
           className="mt-10 md:mt-16 text-center"
