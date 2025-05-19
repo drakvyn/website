@@ -8,7 +8,7 @@ export default function MenuButton() {
   return (
     <>
       <motion.button
-        className="fixed top-6 right-6 z-50 w-12 h-12 bg-[#181924] rounded-full flex items-center justify-center shadow-lg border border-zinc-700/50 hover:border-purple-500/50 transition-all duration-300"
+        className="fixed top-6 right-6 z-50 w-12 h-12 flex items-center justify-center transition-all duration-300"
         onClick={() => setOpen(!open)}
         aria-label={open ? 'Close menu' : 'Open menu'}
         whileHover={{ scale: 1.05 }}

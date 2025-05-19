@@ -17,7 +17,6 @@ export default function MenuOverlay({ open, onClose }) {
 
   const menuItems = [
     { href: '/', label: 'HOME' },
-    { href: '/about', label: 'ABOUT' },
     { href: '/projects', label: 'PROJECTS' },
     { href: '/blog', label: 'BLOG' },
     { href: '/contact', label: 'CONTACT' }
@@ -36,14 +35,14 @@ export default function MenuOverlay({ open, onClose }) {
             onClick={onClose}
           />
           <motion.div
-            className="fixed right-0 left-auto top-0 z-50 w-[30vw] max-w-[500px] h-[500px] bg-[#181924] flex flex-col items-center justify-center shadow-2xl"
+            className="fixed right-0 left-auto top-0 z-50 w-full md:w-[30vw] max-w-[500px] min-h-screen bg-[#181924] flex flex-col items-center justify-center shadow-2xl"
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
             <button
-              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full text-white text-3xl focus:outline-none z-10 hover:bg-white/10 transition-colors"
+              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center text-white focus:outline-none z-10 transition-colors"
               onClick={onClose}
               aria-label="Close menu"
             >
@@ -53,12 +52,12 @@ export default function MenuOverlay({ open, onClose }) {
               </svg>
             </button>
 
-            <nav className="flex flex-col items-center gap-8 mt-12">
+            <nav className="flex flex-col items-center gap-8 mt-12 px-4">
               {menuItems.map((item, index) => (
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  className="text-4xl md:text-5xl font-squada text-white tracking-widest hover:text-purple-500 transition-colors relative group"
+                  className="text-3xl sm:text-4xl md:text-5xl font-squada text-white tracking-widest hover:text-purple-500 transition-colors relative group text-center"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -76,7 +75,7 @@ export default function MenuOverlay({ open, onClose }) {
             </nav>
 
             <motion.div
-              className="flex justify-center gap-6 mt-12"
+              className="flex justify-center gap-6 mt-12 mb-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.5 }}
