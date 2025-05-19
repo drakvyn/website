@@ -1,12 +1,40 @@
-# Configuración de Variables de Entorno para el Portfolio
+# Environment Variables Setup for Portfolio
 
-Este proyecto requiere ciertas variables de entorno para funcionar correctamente, especialmente para la conexión con Sanity CMS.
+This project requires certain environment variables to function correctly, especially for the Sanity CMS connection.
 
-## Variables Requeridas
+## Required Variables
 
-| Variable | Descripción |
+| Variable | Description |
 |----------|-------------|
-| `SANITY_TOKEN` | Token de acceso para Sanity CMS (con permisos de lectura) |
+| `SANITY_TOKEN` | Sanity API token for content access |
+| `NEXT_PUBLIC_SANITY_TOKEN` | Public token for client-side queries |
+
+## Local Development Setup
+
+For local development, create a `.env` file in the project root with the following content:
+
+```env
+SANITY_TOKEN=your_sanity_token_here
+NEXT_PUBLIC_SANITY_TOKEN=your_public_token_here
+```
+
+## Netlify Setup
+
+1. Go to your site's settings in Netlify
+2. Navigate to "Environment variables"
+3. Add the `SANITY_TOKEN` variable with your Sanity token
+
+## Getting the Sanity Token
+
+1. Log in to [manage.sanity.io](https://manage.sanity.io/)
+2. Go to your project settings
+3. Navigate to "API" section
+4. Create a new token with appropriate permissions
+
+## Security Notes
+
+- **Never** include tokens or secrets directly in source code
+- Don't share your tokens on GitHub or other public repositories
 
 ## Configuración en Desarrollo Local
 

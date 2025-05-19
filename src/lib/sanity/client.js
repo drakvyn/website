@@ -5,7 +5,7 @@ import { createClient } from '@sanity/client';
 const SANITY_TOKEN = import.meta.env.NEXT_PUBLIC_SANITY_TOKEN || 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5';
 
 export const client = createClient({
-  projectId: '6704b0nj', // Tu ID de proyecto
+  projectId: '6704b0nj',
   dataset: 'production',
   useCdn: false, // Cambiado a false para siempre obtener los datos más recientes
   apiVersion: '2022-06-01', // Usar la versión de API más reciente

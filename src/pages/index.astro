@@ -7,15 +7,50 @@ import ProjectsSection from '../components/ProjectsSection.jsx';
 import ServicesSection from '../components/ServicesSection.jsx';
 import BlogSection from '../components/BlogSection.jsx';
 import PricingSection from '../components/PricingSection.jsx';
+import JsonLd from '../components/JsonLd.astro';
+
+const title = "Jean Roa - Software Developer & Freelance";
+const description = "Software developer with experience in React, Node.js and modern technologies. Specialized in creating fast, scalable web solutions with excellent user experiences.";
+const keywords = "Jean Roa, software developer, web developer, React, Node.js, Astro, full-stack development, technology consulting, web design";
+
+// JSON-LD data
+const personData = {
+	name: "Jean Roa",
+	jobTitle: "Software Developer & Freelance",
+	url: "https://jeanroa.dev",
+	sameAs: [
+		"https://github.com/jeanrdev",
+		"https://linkedin.com/in/jeanroa",
+	],
+	image: "https://jeanroa.dev/images/profile.jpg"
+};
+
+const websiteData = {
+	name: "Jean Roa - Software Developer & Freelance",
+	url: "https://jeanroa.dev",
+	potentialAction: {
+		"@type": "SearchAction",
+		"target": "https://jeanroa.dev/search?q={search_term_string}",
+		"query-input": "required name=search_term_string"
+	}
+};
 ---
 
-<Layout title="Jean Roa - Software Developer">
+<Layout 
+	title={title}
+	description={description}
+	keywords={keywords}
+	image="/images/home-og-image.jpg"
+>
+	<JsonLd type="Person" data={personData} />
+	<JsonLd type="WebSite" data={websiteData} />
+
 	<MenuButton client:load />
 	<main class="flex flex-col min-h-screen">
-		<div class="container mx-auto px-4 py-8 flex flex-col items-start justify-center min-h-screen">
+		<section class="container mx-auto px-4 py-8 flex flex-col items-start justify-center min-h-screen">
 			<HeroMotion client:load />
 			<DirectLinksMotion client:load />
-		</div>
+		</section>
 		<ProjectsSection client:load />
 		<ServicesSection client:load />
 		<PricingSection client:load />

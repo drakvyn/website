@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.jsx';
 
 interface Props {
   title: string;
@@ -22,6 +23,7 @@ const { title } = Astro.props;
   </head>
   <body class="min-h-screen bg-background font-manrope text-zinc-100">
     <slot />
+    <Footer client:load />
   </body>
 </html>
 

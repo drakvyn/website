@@ -41,7 +41,7 @@ export default function DirectLinksMotion() {
           </motion.a>
           <div className="flex gap-4">
             <motion.a 
-              href="https://github.com/" 
+              href="https://github.com/TheSoftwareWizard" 
               target="_blank" 
               aria-label="GitHub" 
               className="flex items-center justify-center"
@@ -54,7 +54,7 @@ export default function DirectLinksMotion() {
               <img src="/images/BUTTON-GH.svg" alt="GitHub" className="w-10 h-10" />
             </motion.a>
             <motion.a 
-              href="https://linkedin.com/" 
+              href="https://www.linkedin.com/in/jeanmra/" 
               target="_blank" 
               aria-label="LinkedIn" 
               className="flex items-center justify-center"

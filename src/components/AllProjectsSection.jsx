@@ -43,7 +43,7 @@ function ProjectCard({ project, index, onClick }) {
 
   return (
     <motion.div
-      className="w-full mb-16 relative project-container"
+      className="w-full relative project-container project-container1"
       initial={{ opacity: 0, y: 70 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -56,24 +56,9 @@ function ProjectCard({ project, index, onClick }) {
         {/* Left side - Text Content */}
         <div className="w-full md:w-1/2 pr-0 md:pr-8 mb-6 md:mb-0 z-10 relative">
           <motion.h3 
-            className="text-2xl sm:text-3xl md:text-4xl font-squada text-white mb-4 tracking-tight leading-none project-text-animate"
-            initial="initial"
-            whileInView="animate"
-            exit="exit"
-            variants={titleVariants}
-            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl font-squada text-white mb-4 tracking-tight leading-none"
           >
-            <span className="flex flex-wrap text-overlay">
-              {titleChars.map((char, i) => (
-                <span 
-                  key={i}
-                  className="text-wave-animation inline-block"
-                  style={{ '--char-index': i }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
-            </span>
+            {project.title.toUpperCase()}
           </motion.h3>
           
           <motion.div 
@@ -168,7 +153,7 @@ export default function AllProjectsSection() {
 
   if (loading) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center">
         <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
         <p className="text-zinc-400">Loading projects...</p>
       </div>
