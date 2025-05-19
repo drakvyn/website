@@ -7,26 +7,22 @@ const services = [
   {
     id: 1,
     title: "WEB DEVELOPMENT",
-    description: "Creation of custom websites and applications with unique animations and interactive experiences.",
-    icon: "🌐"
+    description: "Creation of custom websites and applications with unique animations and interactive experiences."
   },
   {
     id: 2,
     title: "CUSTOM SOFTWARE DEVELOPMENT",
-    description: "Internal tools, dashboards, process automation, and more.",
-    icon: "✨"
+    description: "Internal tools, dashboards, process automation, and more."
   },
   {
     id: 3,
     title: "MOBILE APPS",
-    description: "Development of mobile applications for iOS and Android that stand out for their performance and design.",
-    icon: "📱"
+    description: "Development of mobile applications for iOS and Android that stand out for their performance and design."
   },
   {
     id: 4,
     title: "E-COMMERCE",
-    description: "Creation of online stores optimized for conversions and with smooth shopping experiences.",
-    icon: "🛒"
+    description: "Creation of online stores optimized for conversions and with smooth shopping experiences."
   }
 ];
 
@@ -221,9 +217,6 @@ export default function ServicesSection() {
                     : 'bg-transparent'
                 }`}
               >
-                <div className="service-icon mb-8">
-                  <span className="text-4xl">{service.icon}</span>
-                </div>
                 <h3 className="font-squada text-white text-5xl md:text-6xl tracking-wide mb-8 relative">
                   <motion.span 
                     className="text-overlay inline-block animated-underline"
@@ -240,17 +233,6 @@ export default function ServicesSection() {
                 }`}>
                   {service.description}
                 </p>
-                <div className={`mt-8 overflow-hidden transition-all duration-300 ${
-                  hoveredService === service.id ? 'h-12 opacity-100' : 'h-0 opacity-0'
-                }`}>
-                  <motion.button
-                    className="px-8 py-3 bg-purple-700 text-white rounded-lg font-semibold hover:bg-purple-800 transition-colors relative overflow-hidden button-hover-effect"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span className="relative z-10">LEARN MORE</span>
-                  </motion.button>
-                </div>
                 
                 {/* Animated line at bottom */}
                 <div className="absolute bottom-0 left-0 w-full h-0.5">
@@ -264,21 +246,6 @@ export default function ServicesSection() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-        
-        <motion.div 
-          className="mt-24 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-        >
-          <a 
-            href="/services" 
-            className="inline-block px-10 py-5 bg-purple-700 text-white text-2xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
-          >
-            <span className="relative z-10">VIEW ALL SERVICES</span>
-          </a>
         </motion.div>
       </div>
     </section>

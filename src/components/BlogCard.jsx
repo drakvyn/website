@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 
 export default function BlogCard({ post }) {
-  // Formatear la fecha
+  // Format the date
   const formattedDate = post.publishedAt ? 
-    format(new Date(post.publishedAt), "dd 'de' MMMM, yyyy", { locale: es }) : 
+    format(new Date(post.publishedAt), "MMMM dd, yyyy") : 
     '';
 
   return (
@@ -18,7 +17,7 @@ export default function BlogCard({ post }) {
       whileHover={{ y: -5 }}
     >
       <a href={`/blog/${post.slug.current}`} className="block">
-        {post.mainImage && (
+        {post.mainImage && post.mainImage.asset && (
           <div className="relative h-48 md:h-64 overflow-hidden">
             <img 
               src={post.mainImage.asset.url} 
@@ -57,7 +56,7 @@ export default function BlogCard({ post }) {
           )}
           
           <div className="flex items-center mt-6">
-            {post.authorImage && (
+            {post.authorImage && post.authorImage.asset && (
               <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
                 <img 
                   src={post.authorImage.asset.url} 
@@ -71,7 +70,7 @@ export default function BlogCard({ post }) {
             </span>
             
             <div className="ml-auto">
-              <span className="text-[#6e7bff] font-semibold text-sm">Leer más</span>
+              <span className="text-[#6e7bff] font-semibold text-sm">Read more</span>
             </div>
           </div>
         </div>

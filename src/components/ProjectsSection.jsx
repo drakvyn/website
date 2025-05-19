@@ -133,26 +133,6 @@ function ProjectCard({ project, index, onClick }) {
           >
             {project.description}
           </motion.p>
-          
-          <div className="flex flex-wrap gap-3">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <button 
-                className="px-4 py-2 md:px-6 md:py-3 bg-purple-700 text-white text-base md:text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 transform hover:scale-105 relative overflow-hidden button-hover-effect purple-glow"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onClick(project);
-                }}
-              >
-                <span className="relative z-10">VIEW DETAILS</span>
-              </button>
-            </motion.div>
-          
-          </div>
         </div>
         
         {/* Right side - Image container with fixed height */}
@@ -278,7 +258,7 @@ export default function ProjectsSection() {
   const displayProjects = loading ? (
     <div className="text-center py-12">
       <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
-      <p className="text-zinc-400">Cargando proyectos...</p>
+      <p className="text-zinc-400">Loading...</p>
     </div>
   ) : error ? (
     <div className="text-center text-red-500 mb-8">
@@ -286,7 +266,7 @@ export default function ProjectsSection() {
     </div>
   ) : projects.length === 0 ? (
     <div className="text-center text-zinc-400 mb-8">
-      No hay proyectos disponibles en este momento.
+      No projects available at this time.
     </div>
   ) : (
     projects.map((project, index) => (

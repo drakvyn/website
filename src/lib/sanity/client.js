@@ -60,6 +60,7 @@ export async function getProjects(limit = 6, start = 0) {
     title,
     slug,
     description,
+    detailedDescription,
     mainImage {
       asset->{
         _id,
@@ -68,6 +69,8 @@ export async function getProjects(limit = 6, start = 0) {
     },
     tags,
     technologies,
+    challenges,
+    solutions,
     publishedAt,
     link,
     repositoryLink

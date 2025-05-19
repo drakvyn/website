@@ -5,7 +5,7 @@ export default function HeroMotion() {
   return (
     <section className="flex flex-col justify-center min-h-[60vh] px-4 md:px-0">
       <motion.p
-        className="text-base md:text-lg lg:text-xl text-white font-manrope mb-2 md:mb-4"
+        className="text-base md:text-lg lg:text-xl text-white font-manrope"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}

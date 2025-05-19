@@ -67,18 +67,6 @@ function BlogCard({ post }) {
             </p>
           )}
           
-          <div className="flex items-center mt-4 md:mt-6">
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden mr-2 md:mr-3 bg-[#12131c] flex items-center justify-center">
-              <span className="text-base md:text-lg">👤</span>
-            </div>
-            <span className="text-zinc-300 text-xs md:text-sm">
-              Jean Roa
-            </span>
-            
-            <div className="ml-auto">
-              <span className="text-purple-700 font-semibold text-xs md:text-sm">Read more</span>
-            </div>
-          </div>
         </div>
       </a>
     </motion.article>
@@ -111,7 +99,7 @@ export default function BlogSection() {
   const displayContent = loading ? (
     <div className="text-center py-12">
       <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
-      <p className="text-zinc-400">Cargando artículos...</p>
+      <p className="text-zinc-400">Loading...</p>
     </div>
   ) : error ? (
     <div className="text-center text-red-500 mb-8">
@@ -119,7 +107,7 @@ export default function BlogSection() {
     </div>
   ) : posts.length === 0 ? (
     <div className="text-center text-zinc-400 mb-8">
-      No hay artículos disponibles en este momento.
+      No articles available at this time.
     </div>
   ) : (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8">

@@ -55,7 +55,7 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
                 {project.tags && project.tags.map((tag, index) => (
                   <span 
                     key={index} 
-                    className="px-3 py-1 text-sm rounded-full bg-[#12131c] text-zinc-400"
+                    className="px-3 py-1 text-md rounded-full bg-[#12131c] text-zinc-400"
                   >
                     {tag}
                   </span>
@@ -63,60 +63,37 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
               </div>
 
               <div className="mb-8">
-                <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
-                <p className="text-zinc-300 text-lg mb-8">
-                  {project.description || "Failed to load description"}
-                </p>
-              </div>
-
-              {/* Technologies Section */}
-              {project.tags && project.tags.length > 0 && (
-                <div className="mb-8">
-                  <h3 className="text-3xl font-squada text-white mb-4">TECHNOLOGIES</h3>
-                  <div className="flex flex-wrap gap-3">
-                    {project.tags.map((tech, index) => (
-                      <span 
-                        key={index} 
-                        className="px-4 py-2 text-base rounded-md bg-purple-800/30 text-purple-300 border border-purple-700/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+                {project.detailedDescription && (
+                  <div className="mt-6">
+                    <h3 className="text-3xl font-squada text-white mb-4">PROJECT DETAILS</h3>
+                    <p className="text-zinc-300 text-lg mb-4">
+                      {project.detailedDescription}
+                    </p>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div>
                   <h3 className="text-3xl font-squada text-white mb-4">CHALLENGES</h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    {project.challenges && project.challenges.length > 0 ? (
+                    {project.challenges && project.challenges.length > 0 ? 
                       project.challenges.map((challenge, index) => (
-                        <li key={index}>{challenge}</li>
-                      ))
-                    ) : (
-                      <>
-                        <li>Complex animation sequences</li>
-                        <li>Optimizing performance</li>
-                        <li>Cross-browser compatibility</li>
-                      </>
-                    )}
+                        <li key={index} className="text-zinc-300">{challenge}</li>
+                      )) : 
+                      <li className="text-zinc-300">No challenges listed for this project</li>
+                    }
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-3xl font-squada text-white mb-4">SOLUTIONS</h3>
                   <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    {project.solutions && project.solutions.length > 0 ? (
+                    {project.solutions && project.solutions.length > 0 ? 
                       project.solutions.map((solution, index) => (
-                        <li key={index}>{solution}</li>
-                      ))
-                    ) : (
-                      <>
-                        <li>Framer Motion animations</li>
-                        <li>Code splitting and lazy loading</li>
-                        <li>Thorough browser testing</li>
-                      </>
-                    )}
+                        <li key={index} className="text-zinc-300">{solution}</li>
+                      )) : 
+                      <li className="text-zinc-300">No solutions listed for this project</li>
+                    }
                   </ul>
                 </div>
               </div>
