@@ -11,11 +11,11 @@ export default defineConfig({
     // Define variables que estarán disponibles en el código cliente
     define: {
       // EmailJS variables
-      'import.meta.env.VITE_EMAILJS_SERVICE_ID': JSON.stringify(process.env.VITE_EMAILJS_SERVICE_ID),
-      'import.meta.env.VITE_EMAILJS_TEMPLATE_ID': JSON.stringify(process.env.VITE_EMAILJS_TEMPLATE_ID),
-      'import.meta.env.VITE_EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.VITE_EMAILJS_PUBLIC_KEY),
+      'import.meta.env.PUBLIC_EMAILJS_SERVICE_ID': JSON.stringify(process.env.PUBLIC_EMAILJS_SERVICE_ID),
+      'import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID': JSON.stringify(process.env.PUBLIC_EMAILJS_TEMPLATE_ID),
+      'import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY': JSON.stringify(process.env.PUBLIC_EMAILJS_PUBLIC_KEY),
       // Sanity token (solo lectura)
-      'import.meta.env.VITE_SANITY_TOKEN': JSON.stringify(process.env.VITE_SANITY_TOKEN)
+      'import.meta.env.PUBLIC_SANITY_TOKEN': JSON.stringify(process.env.PUBLIC_SANITY_TOKEN)
     },
     // Evita que las variables de entorno se expongan en la compilación
     build: {

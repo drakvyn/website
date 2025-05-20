@@ -6,7 +6,7 @@ export const client = createClient({
   dataset: 'production',
   useCdn: true, // Usar CDN para mejor rendimiento
   apiVersion: '2022-06-01',
-  token: import.meta.env.VITE_SANITY_TOKEN // Token de solo lectura
+  token: import.meta.env.PUBLIC_SANITY_TOKEN // Token de solo lectura
 });
 
 // Helper function to fetch blog posts with pagination
