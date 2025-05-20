@@ -216,24 +216,24 @@ export default function ProjectsSection() {
           <div className="inline-block animate-spin h-8 w-8 border-t-2 border-white rounded-full mb-4"></div>
           <p className="text-zinc-400">Loading projects...</p>
         </div>
-      </div>
+    </div>
     );
   }
 
   if (error) {
     return (
-      <div className="text-center text-red-500 mb-8">
-        {error}
-      </div>
+    <div className="text-center text-red-500 mb-8">
+      {error}
+    </div>
     );
   }
 
   if (projects.length === 0) {
     return (
-      <div className="text-center text-zinc-400 mb-8">
-        No projects available at this time.
-      </div>
-    );
+    <div className="text-center text-zinc-400 mb-8">
+      No projects available at this time.
+    </div>
+  );
   }
 
   return (
@@ -330,11 +330,11 @@ export default function ProjectsSection() {
       {/* Project detail modal */}
       <AnimatePresence>
         {detailOpen && selectedProject && (
-          <ProjectDetail
-            project={selectedProject}
-            isOpen={detailOpen}
-            onClose={handleCloseDetail}
-          />
+      <ProjectDetail 
+        project={selectedProject}
+        isOpen={detailOpen} 
+        onClose={handleCloseDetail}
+      />
         )}
       </AnimatePresence>
     </section>

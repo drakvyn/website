@@ -1,51 +1,49 @@
 // Define available plans for purchase
 export const plans = [
   {
-    id: 'plan_essential',
-    name: 'Essential Plan',
-    description: 'Perfect for small businesses needing occasional tech solutions.',
+    id: 'basic',
+    name: 'Basic',
+    description: 'Perfect for small projects and personal websites',
+    price: 99,
     features: [
-      'Up to 4 hours of development work (web, apps, automation, AI integration)',
-      'Technical consulting & guidance',
-      'Email support (48h response)',
-      'Monthly progress report'
+      'Responsive Design',
+      'Basic SEO Optimization',
+      'Contact Form',
+      'Social Media Integration',
+      '1 Month of Support'
     ],
-    price: 149,
-    priceId: 'price_essential', // This ID will be configured in Stripe
-    popular: false,
-    color: 'blue'
+    popular: false
   },
   {
-    id: 'plan_professional',
-    name: 'Professional Plan (recommended)',
-    description: 'Ideal for businesses needing regular development and automation tasks.',
+    id: 'pro',
+    name: 'Professional',
+    description: 'Ideal for growing businesses and startups',
+    price: 199,
     features: [
-      'Up to 10 hours of development work',
-      'Technical consulting & solution design',
-      'Email & chat support (24-48h response)',
-      'Task prioritization queue',
-      'Bi-weekly progress updates'
+      'Everything in Basic',
+      'Advanced SEO Optimization',
+      'Blog Integration',
+      'Analytics Setup',
+      '3 Months of Support',
+      'Performance Optimization'
     ],
+    popular: true
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    description: 'Complete solution for large businesses',
     price: 299,
-    priceId: 'price_professional', // This ID will be configured in Stripe
-    popular: true,
-    color: 'purple'
-  },
-  {
-    id: 'plan_premium',
-    name: 'Premium Plan',
-    description: 'For businesses seeking a reliable development partner with priority access.',
     features: [
-      'Up to 20 hours of dedicated development work',
-      'Full technical consulting & strategy sessions',
-      'Priority support (response within 24h)',
-      'Weekly progress updates',
-      'Task fast-track (priority handling)'
+      'Everything in Professional',
+      'Custom Features Development',
+      'Priority Support',
+      'Advanced Security',
+      '6 Months of Support',
+      'Performance Monitoring',
+      'Custom Integrations'
     ],
-    price: 499,
-    priceId: 'price_premium', // This ID will be configured in Stripe
-    popular: false,
-    color: 'indigo'
+    popular: false
   }
 ];
 

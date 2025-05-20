@@ -1,37 +1,46 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { plans } from '../lib/stripe/plans';
-import { getStripe } from '../lib/stripe/client';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
+import { MERCADOPAGO_PUBLIC_KEY, plans } from '../lib/mercadopago/config';
 import './directlinks-overlay.css';
+
+// Initialize MercadoPago
+initMercadoPago(MERCADOPAGO_PUBLIC_KEY);
 
 export default function PricingSection() {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [loadingCheckout, setLoadingCheckout] = useState(false);
+  const [preferenceId, setPreferenceId] = useState(null);
 
-  // Function to handle Stripe checkout
-  const handleCheckout = async (priceId) => {
+  // Function to handle MercadoPago payment
+  const handleMercadoPagoPayment = async (plan) => {
     try {
       setLoadingCheckout(true);
       
-      // In a real environment, we would call an API to create the session
-      // Example:
-      // const response = await fetch('/api/create-checkout-session', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ priceId }),
-      // });
-      // const { sessionId } = await response.json();
-      // const stripe = await getStripe();
-      // stripe.redirectToCheckout({ sessionId });
+      // Create payment preference
+      const response = await fetch('/api/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: `${plan.name} Plan`,
+          price: plan.price,
+          quantity: 1,
+          currency_id: 'CLP' // Chilean Peso
+        }),
+      });
+
+      const data = await response.json();
       
-      // For this example, we simulate the process
-      setTimeout(() => {
-        setLoadingCheckout(false);
-        alert('In a production environment, this would redirect to Stripe for payment');
-      }, 1500);
+      if (data.preferenceId) {
+        setPreferenceId(data.preferenceId);
+      } else {
+        throw new Error(data.error || 'Failed to create payment preference');
+      }
       
     } catch (error) {
-      console.error('Error starting checkout:', error);
+      console.error('Error creating payment:', error);
+      alert('There was an error processing your payment. Please try again.');
+    } finally {
       setLoadingCheckout(false);
     }
   };
@@ -153,7 +162,7 @@ export default function PricingSection() {
                       ? 'bg-white hover:bg-white/90'
                       : 'bg-white hover:bg-white/90'
                   }`}
-                  onClick={() => handleCheckout(plan.priceId)}
+                  onClick={() => handleMercadoPagoPayment(plan)}
                   disabled={loadingCheckout}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -171,6 +180,32 @@ export default function PricingSection() {
             </motion.div>
           ))}
         </motion.div>
+        
+        {/* MercadoPago Checkout */}
+        {preferenceId && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-[#181924] rounded-xl p-6 max-w-lg w-full"
+            >
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-2xl font-squada text-white">Complete Your Payment</h3>
+                <button
+                  onClick={() => setPreferenceId(null)}
+                  className="text-zinc-400 hover:text-white transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="bg-[#1f2033] p-4 rounded-lg">
+                <Wallet initialization={{ preferenceId }} />
+              </div>
+            </motion.div>
+          </div>
+        )}
         
         <motion.div
           className="mt-10 md:mt-20 p-5 md:p-8 bg-[#181924] rounded-xl"
