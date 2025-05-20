@@ -160,9 +160,9 @@ export default function BlogSection() {
         >
           <a 
             href="/blog" 
-            className="inline-block px-6 py-3 md:px-8 md:py-4 bg-purple-700 text-white text-base md:text-xl font-semibold rounded-lg hover:bg-purple-800 transition-all duration-300 relative overflow-hidden button-hover-effect"
+            className="inline-block px-6 py-3 md:px-10 md:py-5 bg-white text-black text-xl md:text-2xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
           >
-            <span className="relative z-10">VIEW ALL ARTICLES</span>
+            <span className="relative z-10 text-overlay">VIEW ALL ARTICLES</span>
           </a>
         </motion.div>
       </div>

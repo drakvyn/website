@@ -15,17 +15,18 @@ export default function HeroMotion() {
       <motion.h1
         className="font-squada text-white relative tracking-tight md:tracking-normal"
         style={{ 
-          fontSize: 'clamp(2.5rem, 20vw, 12rem)', 
+          fontSize: 'clamp(3rem, 15vw, 12rem)', 
           lineHeight: '0.9',
           wordBreak: 'break-word'
         }}
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: 100, opacity: 0, scale: 0.95 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ 
-          duration: 1.2,
+          duration: 1.5,
           type: 'spring',
-          stiffness: 50,
-          damping: 15
+          stiffness: 40,
+          damping: 20,
+          mass: 1
         }}
       >
         <motion.span 

@@ -82,6 +82,11 @@ export default function TestimonialsSection() {
     setProgress(0);
   }, []);
 
+  const prevTestimonial = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setProgress(0);
+  }, []);
+
   useEffect(() => {
     let progressInterval;
     let slideTimeout;
@@ -118,7 +123,7 @@ export default function TestimonialsSection() {
       <div 
         className="absolute inset-0 opacity-30"
         style={{
-          background: 'radial-gradient(circle at 30% 70%, rgba(126, 34, 206, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(126, 34, 206, 0.15) 0%, transparent 50%)',
+          background: 'radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
           pointerEvents: 'none'
         }}
       />
@@ -154,16 +159,6 @@ export default function TestimonialsSection() {
         </motion.div>
         
         <div className="relative max-w-4xl mx-auto">
-          {/* Progress bar */}
-          {/* <div className="absolute -top-2 left-0 w-full h-0.5 bg-purple-900/20 overflow-hidden">
-            <motion.div
-              className="h-full bg-purple-600"
-              initial={{ width: "0%" }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.1, ease: "linear" }}
-            />
-          </div> */}
-
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -171,7 +166,7 @@ export default function TestimonialsSection() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="bg-[#181924] rounded-xl p-8 shadow-2xl border border-purple-900/20 backdrop-blur-lg cursor-pointer"
+              className="bg-[#181924] rounded-xl p-8 shadow-2xl border border-white/10 backdrop-blur-lg cursor-pointer"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -182,13 +177,13 @@ export default function TestimonialsSection() {
                     alt={testimonials[currentIndex].name}
                     className="w-24 h-24 rounded-xl object-cover"
                   />
-                  <div className="absolute inset-0 rounded-xl ring-2 ring-purple-700/50 ring-offset-2 ring-offset-[#181924]"></div>
+                  <div className="absolute inset-0 rounded-xl ring-2 ring-white/30 ring-offset-2 ring-offset-[#181924]"></div>
                 </div>
                 <div className="text-center md:text-left">
                   <h3 className="text-2xl font-squada text-white mb-2">
                     <span className="text-overlay">{testimonials[currentIndex].name}</span>
                   </h3>
-                  <p className="text-purple-400">{testimonials[currentIndex].position}</p>
+                  <p className="text-white/80">{testimonials[currentIndex].position}</p>
                 </div>
               </div>
               <blockquote className="text-zinc-300 text-lg md:text-xl italic mb-8 leading-relaxed">
@@ -200,7 +195,7 @@ export default function TestimonialsSection() {
                     href={testimonials[currentIndex].linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors group"
+                    className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors group"
                   >
                     <span>See on LinkedIn</span>
                     <svg 
@@ -213,18 +208,41 @@ export default function TestimonialsSection() {
                   </a>
                 </div>
                 
-                {/* Testimonial indicators */}
-                <div className="flex justify-center gap-2">
-                  {testimonials.map((_, index) => (
-                    <div
-                      key={index}
-                      className={`h-0.5 transition-all duration-700 ${
-                        index === currentIndex 
-                          ? 'bg-purple-600 w-8' 
-                          : 'bg-purple-900/40 w-2'
-                      }`}
-                    />
-                  ))}
+                {/* Navigation Controls */}
+                <div className="flex justify-between items-center mt-4">
+                  <button
+                    onClick={prevTestimonial}
+                    className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                    aria-label="Previous testimonial"
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Testimonial indicators */}
+                  <div className="flex gap-2">
+                    {testimonials.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`h-0.5 transition-all duration-700 ${
+                          index === currentIndex 
+                            ? 'bg-white w-8' 
+                            : 'bg-white/20 w-2'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={nextTestimonial}
+                    className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                    aria-label="Next testimonial"
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </motion.div>

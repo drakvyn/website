@@ -17,7 +17,7 @@ export const plans = [
   },
   {
     id: 'plan_professional',
-    name: 'Professional Plan',
+    name: 'Professional Plan (recommended)',
     description: 'Ideal for businesses needing regular development and automation tasks.',
     features: [
       'Up to 10 hours of development work',

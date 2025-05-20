@@ -78,7 +78,7 @@ function ParticlesBackground() {
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           radius: Math.random() * (isMobile ? 1.5 : 2) + 0.5,
-          color: `rgba(126, 34, 206, ${Math.random() * 0.4 + 0.1})`,
+          color: `rgba(255, 255, 255, ${Math.random() * 0.4 + 0.1})`,
           speedX: Math.random() * (isMobile ? 0.3 : 0.5) - 0.25,
           speedY: Math.random() * (isMobile ? 0.3 : 0.5) - 0.25
         });
@@ -128,7 +128,7 @@ function ParticlesBackground() {
           
           if (distance < maxDistance) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(126, 34, 206, ${(maxDistance - distance) / maxDistance * 0.3})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${(maxDistance - distance) / maxDistance * 0.3})`;
             ctx.lineWidth = 0.5;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -220,17 +220,9 @@ export default function ServicesSection() {
                 }`}
               >
                 <h3 className="font-squada text-white text-4xl sm:text-5xl md:text-6xl tracking-wide mb-6 sm:mb-8 relative">
-                  <motion.span 
-                    className="text-overlay inline-block animated-underline"
-                    initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                    whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                  >
                     <span className="text-overlay">
                       {service.title}
                     </span>
-                  </motion.span>
                 </h3>
                 <p className={`text-base sm:text-lg transition-colors duration-300 flex-grow ${
                   hoveredService === service.id ? 'text-zinc-300' : 'text-zinc-400'
@@ -241,7 +233,7 @@ export default function ServicesSection() {
                 {/* Animated line at bottom */}
                 <div className="absolute bottom-0 left-0 w-full h-0.5">
                   <motion.div 
-                    className="h-full bg-purple-700"
+                    className="h-full bg-white"
                     initial={{ width: 0 }}
                     whileInView={{ width: hoveredService === service.id ? '100%' : '0%' }}
                     transition={{ duration: 0.5 }}

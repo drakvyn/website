@@ -43,7 +43,7 @@ function ProjectCard({ project, index, onClick }) {
 
   return (
     <motion.div
-      className="w-full relative project-container project-container1"
+      className="w-full relative project-card cursor-pointer"
       initial={{ opacity: 0, y: 70 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -52,67 +52,59 @@ function ProjectCard({ project, index, onClick }) {
       onMouseLeave={() => !isMobile && setHovered(false)}
       onClick={() => onClick(project)}
     >
-      <div className="flex flex-col md:flex-row w-full cursor-pointer relative min-h-[250px]">
-        {/* Left side - Text Content */}
-        <div className="w-full md:w-1/2 pr-0 md:pr-8 mb-6 md:mb-0 z-10 relative">
-          <motion.h3 
-            className="text-2xl sm:text-3xl md:text-4xl font-squada text-white mb-4 tracking-tight leading-none"
-          >
-            {project.title.toUpperCase()}
-          </motion.h3>
-          
+      <div className="flex flex-col w-full cursor-pointer relative">
+        {/* Image Container */}
+        <div className="w-full relative overflow-hidden rounded-lg project-image-container">
           <motion.div 
-            className="flex flex-wrap gap-2 mb-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-          >
-            {project.tags && project.tags.map((tag, i) => (
-              <span 
-                key={i}
-                className="px-2 py-1 text-xs rounded-full bg-[#12131c] text-zinc-400"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
-          
-          <motion.p
-            className="text-zinc-400 mb-4 line-clamp-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            {project.description}
-          </motion.p>
-        </div>
-        
-        {/* Right side - Image */}
-        <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg">
-          <motion.div 
-            className="h-48 md:h-60 w-full bg-cover bg-center"
+            className="h-[350px] w-full bg-cover bg-center"
             style={{ 
               backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`,
             }}
-            variants={imageVariants}
-            initial="initial"
-            whileInView="animate"
-            whileHover="hover"
-            viewport={{ once: true }}
+            initial={{ scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.5 }}
           />
+          
+          {/* Content Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e16] via-[#0e0e16]/80 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-8 space-y-4">
+              <motion.h3 
+                className="text-overlay font-squada text-white text-2xl md:text-3xl tracking-tight leading-none"
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                {project.title.toUpperCase()}
+              </motion.h3>
+              
+              <motion.p
+                className="text-zinc-300 text-sm line-clamp-3"
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                {project.description}
+              </motion.p>
+
+              <motion.div 
+                className="flex flex-wrap gap-1.5"
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {project.tags && project.tags.map((tag, i) => (
+                  <span 
+                    key={i}
+                    className="px-3 py-1 text-xs font-medium rounded-md bg-white text-black hover:bg-zinc-100 transition-colors duration-200"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      {/* Divider */}
-      <motion.div 
-        className="w-full h-px bg-zinc-800 mt-6"
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        viewport={{ once: true }}
-      />
     </motion.div>
   );
 }
@@ -128,7 +120,6 @@ export default function AllProjectsSection() {
     async function fetchProjects() {
       try {
         setLoading(true);
-        // Fetch more projects for the "all projects" page (20 instead of 6)
         const fetchedProjects = await getProjects(20);
         setProjects(fetchedProjects);
         setLoading(false);
@@ -153,9 +144,11 @@ export default function AllProjectsSection() {
 
   if (loading) {
     return (
-      <div className="text-center">
-        <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
-        <p className="text-zinc-400">Loading projects...</p>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="inline-block animate-spin h-8 w-8 border-t-2 border-white rounded-full mb-4"></div>
+          <p className="text-zinc-400">Loading projects...</p>
+        </div>
       </div>
     );
   }
@@ -177,24 +170,21 @@ export default function AllProjectsSection() {
   }
 
   return (
-    <div className="mb-20">
-      <div className="grid grid-cols-1 gap-6">
-        {projects.map((project, index) => (
-          <ProjectCard 
-            key={project._id} 
-            project={project}
-            index={index}
-            onClick={handleOpenDetail}
-          />
-        ))}
-      </div>
+    <>
+      {projects.map((project, index) => (
+        <ProjectCard 
+          key={project._id} 
+          project={project}
+          index={index}
+          onClick={handleOpenDetail}
+        />
+      ))}
 
-      {/* Project detail modal */}
       <ProjectDetail 
         project={selectedProject}
         isOpen={detailOpen} 
         onClose={handleCloseDetail}
       />
-    </div>
+    </>
   );
 } 

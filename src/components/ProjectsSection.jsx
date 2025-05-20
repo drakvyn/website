@@ -120,12 +120,11 @@ function ProjectCard({ project, index, onClick }) {
             <div className="mb-2">
               <span className="text-md md:text-md text-zinc-400 font-manrope tracking-wider uppercase">Used Technologies</span>
             </div>
-            <div className="flex flex-wrap gap-2 md:gap-3 bg-white p-3 rounded-lg relative">
-              <div className="absolute inset-0 bg-white rounded-lg text-overlay"></div>
+            <div className="flex flex-wrap gap-2 md:gap-3">
               {project.tags && project.tags.map((tag, i) => (
                 <motion.span 
                   key={i}
-                  className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-black font-manrope tracking-wide relative z-10"
+                  className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-white font-manrope tracking-wide"
                   variants={tagVariants}
                   initial="initial"
                   whileInView="animate"

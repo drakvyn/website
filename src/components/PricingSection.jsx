@@ -63,7 +63,7 @@ export default function PricingSection() {
       <div 
         className="absolute inset-0 overflow-hidden" 
         style={{ 
-          backgroundImage: 'radial-gradient(circle at 30% 70%, rgba(126, 34, 206, 0.05) 0%, transparent 40%), radial-gradient(circle at 70% 30%, rgba(126, 34, 206, 0.05) 0%, transparent 40%)',
+          backgroundImage: 'radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 40%), radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 40%)',
           pointerEvents: 'none'
         }}
       ></div>
@@ -109,18 +109,12 @@ export default function PricingSection() {
             <motion.div
               key={plan.id}
               className={`relative rounded-xl md:rounded-2xl overflow-hidden ${
-                plan.popular ? 'md:transform md:-translate-y-4' : ''
+                plan.popular ? 'md:transform md:-translate-y-4 border-2 border-white' : ''
               }`}
               variants={itemVariants}
               onMouseEnter={() => setSelectedPlan(plan.id)}
               onMouseLeave={() => setSelectedPlan(null)}
             >
-              {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-purple-700 text-white text-center py-1 md:py-2 text-xs md:text-sm font-semibold">
-                  MOST POPULAR
-                </div>
-              )}
-              
               <div className={`p-5 md:p-8 h-full flex flex-col ${
                 plan.popular 
                   ? 'bg-gradient-to-b from-[#1f2033] to-[#181924]' 
@@ -144,7 +138,7 @@ export default function PricingSection() {
                   <ul className="space-y-2 md:space-y-3">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-start text-sm md:text-base text-zinc-300">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-purple-700 mt-0.5 mr-1 md:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-4 h-4 md:w-5 md:h-5 text-white mt-0.5 mr-1 md:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                         </svg>
                         {feature}
@@ -154,10 +148,10 @@ export default function PricingSection() {
                 </div>
                 
                 <motion.button
-                  className={`w-full py-3 md:py-4 rounded-lg text-white font-semibold transition-all relative overflow-hidden ${
+                  className={`w-full py-3 md:py-4 rounded-lg text-[#1F1B24] font-semibold transition-all relative overflow-hidden ${
                     plan.popular
-                      ? 'bg-purple-700 hover:bg-purple-800 button-hover-effect'
-                      : 'bg-[#2d2e3d] hover:bg-[#3d3e4d]'
+                      ? 'bg-white hover:bg-white/90'
+                      : 'bg-white hover:bg-white/90'
                   }`}
                   onClick={() => handleCheckout(plan.priceId)}
                   disabled={loadingCheckout}
@@ -190,13 +184,14 @@ export default function PricingSection() {
               <h3 className="text-xl md:text-2xl font-squada text-white mb-1 md:mb-2">Need a custom solution?</h3>
               <p className="text-sm md:text-base text-zinc-400">If you're looking for a tailored solution for your project, contact me.</p>
             </div>
-            <motion.button
-              className="px-6 md:px-8 py-3 md:py-4 bg-transparent border-2 border-purple-700 text-white rounded-lg font-semibold hover:bg-purple-700 transition-all duration-300 relative overflow-hidden button-hover-effect w-full md:w-auto text-sm md:text-base"
+            <motion.a 
+              href="#contact" 
+              className="px-6 md:px-8 py-3 md:py-4 bg-white hover:bg-white/90 text-[#1F1B24] rounded-lg font-semibold transition-all duration-300 relative overflow-hidden w-full md:w-auto text-sm md:text-base"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
               <span className="relative z-10">REQUEST QUOTE</span>
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
       </div>
