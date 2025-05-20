@@ -25,16 +25,16 @@ export default function ContactSection() {
   useEffect(() => {
     // Debug: Verificar variables de entorno
     console.log('Environment Variables:', {
-      serviceID: import.meta.env.VIT    E_EMAILJS_SERVICE_ID,
-      templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      serviceID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+      templateID: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
     });
 
     // Verificar la configuración de EmailJS
     const config = {
-      serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      serviceID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+      templateID: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
     };
 
     console.log('EmailJS Config:', {
