@@ -5,9 +5,9 @@ import './directlinks-overlay.css';
 
 // Configuración de EmailJS
 const EMAILJS_CONFIG = {
-  serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
-  templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+  serviceID: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+  templateID: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
 };
 
 export default function ContactSection() {
