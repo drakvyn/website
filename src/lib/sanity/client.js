@@ -1,17 +1,12 @@
 import { createClient } from '@sanity/client';
 
-// Definimos el token teniendo en cuenta el entorno (desarrollo o producción)
-// Usar la variable de entorno que ya está configurada en Netlify
-const SANITY_TOKEN = import.meta.env.NEXT_PUBLIC_SANITY_TOKEN || 'skHsw6EPCQo7DBFRFD3DFetZ6I5BfOB8bBgcDebILWHRzNyD4JgQ7uL8nwajWkrOEkvs9IJjPeZMgqBB5';
-
+// Cliente de solo lectura para el frontend
 export const client = createClient({
   projectId: '6704b0nj',
   dataset: 'production',
-  useCdn: false, // Cambiado a false para siempre obtener los datos más recientes
-  apiVersion: '2022-06-01', // Usar la versión de API más reciente
-  token: SANITY_TOKEN,
-  withCredentials: false, // Importante para CORS
-  cors: true, // Habilitar CORS explícitamente
+  useCdn: true, // Usar CDN para mejor rendimiento
+  apiVersion: '2022-06-01',
+  token: import.meta.env.VITE_SANITY_TOKEN // Token de solo lectura
 });
 
 // Helper function to fetch blog posts with pagination
@@ -53,14 +48,13 @@ export async function getBlogPostBySlug(slug) {
   return await client.fetch(query, { slug });
 }
 
-// Helper function to fetch projects
-export async function getProjects(limit = 6, start = 0) {
-  const query = `*[_type == "project"] | order(publishedAt desc) [${start}...${start + limit}] {
+// Helper function to fetch all projects
+export async function getAllProjects() {
+  const query = `*[_type == "project"] | order(publishedAt desc) {
     _id,
     title,
     slug,
     description,
-    detailedDescription,
     mainImage {
       asset->{
         _id,
@@ -69,8 +63,6 @@ export async function getProjects(limit = 6, start = 0) {
     },
     tags,
     technologies,
-    challenges,
-    solutions,
     publishedAt,
     link,
     repositoryLink

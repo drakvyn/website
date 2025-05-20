@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getProjects } from '../lib/sanity/client';
+import { getAllProjects } from '../lib/sanity/client';
 import ProjectDetail from './ProjectDetail';
 import './directlinks-overlay.css';
 import './projects.css';
@@ -183,18 +183,19 @@ export default function ProjectsSection() {
   const [detailOpen, setDetailOpen] = useState(false);
 
   useEffect(() => {
-    async function fetchProjects() {
+    const fetchProjects = async () => {
       try {
         setLoading(true);
-        const fetchedProjects = await getProjects(6);
-        setProjects(fetchedProjects);
+        const fetchedProjects = await getAllProjects();
+        // Tomamos solo los primeros 6 proyectos para la sección principal
+        setProjects(fetchedProjects.slice(0, 6));
         setLoading(false);
-      } catch (err) {
-        console.error('Error fetching projects:', err);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
         setError('Failed to load projects');
         setLoading(false);
       }
-    }
+    };
 
     fetchProjects();
   }, []);
@@ -208,30 +209,32 @@ export default function ProjectsSection() {
     setDetailOpen(false);
   };
 
-  // Use placeholders if loading or there's an error
-  const displayProjects = loading ? (
-    <div className="text-center py-12">
-      <div className="inline-block animate-spin h-8 w-8 border-t-2 border-purple-500 rounded-full mb-4"></div>
-      <p className="text-zinc-400">Loading...</p>
-    </div>
-  ) : error ? (
-    <div className="text-center text-red-500 mb-8">
-      {error}
-    </div>
-  ) : projects.length === 0 ? (
-    <div className="text-center text-zinc-400 mb-8">
-      No projects available at this time.
-    </div>
-  ) : (
-    projects.map((project, index) => (
-      <ProjectCard 
-        key={project._id} 
-        project={project}
-        index={index}
-        onClick={handleOpenDetail}
-      />
-    ))
-  );
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="inline-block animate-spin h-8 w-8 border-t-2 border-white rounded-full mb-4"></div>
+          <p className="text-zinc-400">Loading projects...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500 mb-8">
+        {error}
+      </div>
+    );
+  }
+
+  if (projects.length === 0) {
+    return (
+      <div className="text-center text-zinc-400 mb-8">
+        No projects available at this time.
+      </div>
+    );
+  }
 
   return (
     <section className="py-12 md:py-24 w-full bg-[#0e0e16] relative overflow-hidden">
@@ -267,7 +270,35 @@ export default function ProjectsSection() {
 
         <div className="flex flex-col w-full">
           {loading || error || projects.length === 0 ? (
-            displayProjects
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project._id}
+                  className="project-card"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  onClick={() => handleOpenDetail(project)}
+                >
+                  <div className="relative overflow-hidden rounded-lg cursor-pointer">
+                    <motion.div
+                      className="aspect-video bg-cover bg-center"
+                      style={{
+                        backgroundImage: `url(${project.mainImage?.asset?.url || '/placeholder-project.jpg'})`
+                      }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <h3 className="text-white text-xl font-bold mb-2">{project.title}</h3>
+                      <p className="text-zinc-300 text-sm line-clamp-2">{project.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           ) : (
             projects.map((project, index) => (
               <ProjectCard 
@@ -297,11 +328,15 @@ export default function ProjectsSection() {
       </div>
 
       {/* Project detail modal */}
-      <ProjectDetail 
-        project={selectedProject}
-        isOpen={detailOpen} 
-        onClose={handleCloseDetail}
-      />
+      <AnimatePresence>
+        {detailOpen && selectedProject && (
+          <ProjectDetail
+            project={selectedProject}
+            isOpen={detailOpen}
+            onClose={handleCloseDetail}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 } 

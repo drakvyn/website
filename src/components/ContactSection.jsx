@@ -3,6 +3,13 @@ import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import './directlinks-overlay.css';
 
+// Configuración de EmailJS
+const EMAILJS_CONFIG = {
+  serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+};
+
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
@@ -16,14 +23,32 @@ export default function ContactSection() {
   const [emailjsReady, setEmailjsReady] = useState(false);
 
   useEffect(() => {
+    // Debug: Verificar variables de entorno
+    console.log('Environment Variables:', {
+      serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    });
+
+    // Verificar la configuración de EmailJS
+    const config = {
+      serviceID: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      templateID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    };
+
+    console.log('EmailJS Config:', {
+      serviceID: config.serviceID,
+      templateID: config.templateID,
+      publicKey: config.publicKey ? 'Present' : 'Missing'
+    });
+
     // Initialize EmailJS
     try {
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-      if (!publicKey) {
-        console.error('EmailJS Public Key is missing');
-        return;
+      if (!config.publicKey) {
+        throw new Error('EmailJS Public Key is missing');
       }
-      emailjs.init(publicKey);
+      emailjs.init(config.publicKey);
       setEmailjsReady(true);
       console.log('EmailJS initialized successfully');
     } catch (error) {
@@ -61,24 +86,19 @@ export default function ContactSection() {
         to_name: 'Jean',
       };
 
-      // Verificar que las variables de entorno estén disponibles
-      const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-      if (!serviceID || !templateID || !publicKey) {
+      if (!EMAILJS_CONFIG.serviceID || !EMAILJS_CONFIG.templateID) {
         throw new Error('EmailJS configuration is missing. Please check your environment variables.');
       }
 
       console.log('Attempting to send email with params:', {
-        serviceID,
-        templateID,
+        serviceID: EMAILJS_CONFIG.serviceID,
+        templateID: EMAILJS_CONFIG.templateID,
         templateParams
       });
 
       const response = await emailjs.send(
-        serviceID,
-        templateID,
+        EMAILJS_CONFIG.serviceID,
+        EMAILJS_CONFIG.templateID,
         templateParams
       );
 

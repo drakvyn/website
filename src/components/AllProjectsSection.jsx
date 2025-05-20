@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getProjects } from '../lib/sanity/client';
 import ProjectDetail from './ProjectDetail';
 import './directlinks-overlay.css';
 import './projects.css';
+
+// Importación dinámica del cliente de Sanity
+const sanityClient = await import('../lib/sanity/client.js');
 
 function ProjectCard({ project, index, onClick }) {
   const [hovered, setHovered] = useState(false);
@@ -117,18 +119,18 @@ export default function AllProjectsSection() {
   const [detailOpen, setDetailOpen] = useState(false);
 
   useEffect(() => {
-    async function fetchProjects() {
+    const fetchProjects = async () => {
       try {
         setLoading(true);
-        const fetchedProjects = await getProjects(20);
+        const fetchedProjects = await sanityClient.getAllProjects();
         setProjects(fetchedProjects);
         setLoading(false);
-      } catch (err) {
-        console.error('Error fetching projects:', err);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
         setError('Failed to load projects');
         setLoading(false);
       }
-    }
+    };
 
     fetchProjects();
   }, []);
