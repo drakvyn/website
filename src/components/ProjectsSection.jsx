@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getAllProjects } from '../lib/sanity/client';
+import { getAllProjects, getProjectBySlug } from '../lib/sanity/client';
 import ProjectDetail from './ProjectDetail';
 import './directlinks-overlay.css';
 import './projects.css';
@@ -181,6 +181,7 @@ export default function ProjectsSection() {
   const [error, setError] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [detailLoading, setDetailLoading] = useState(false);
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -200,9 +201,27 @@ export default function ProjectsSection() {
     fetchProjects();
   }, []);
 
-  const handleOpenDetail = (project) => {
-    setSelectedProject(project);
-    setDetailOpen(true);
+  const handleOpenDetail = async (project) => {
+    try {
+      setDetailLoading(true);
+      // Cargamos el proyecto completo incluyendo detailedDescription, challenges y solutions
+      if (project.slug && project.slug.current) {
+        const fullProject = await getProjectBySlug(project.slug.current);
+        setSelectedProject(fullProject);
+      } else {
+        // Si no tiene slug, usamos el proyecto tal como está
+        setSelectedProject(project);
+        console.warn('Project missing slug, using limited data');
+      }
+      setDetailOpen(true);
+    } catch (error) {
+      console.error('Error loading project details:', error);
+      // En caso de error, usamos los datos limitados que ya tenemos
+      setSelectedProject(project);
+      setDetailOpen(true);
+    } finally {
+      setDetailLoading(false);
+    }
   };
 
   const handleCloseDetail = () => {
@@ -330,11 +349,12 @@ export default function ProjectsSection() {
       {/* Project detail modal */}
       <AnimatePresence>
         {detailOpen && selectedProject && (
-      <ProjectDetail 
-        project={selectedProject}
-        isOpen={detailOpen} 
-        onClose={handleCloseDetail}
-      />
+        <ProjectDetail 
+          project={selectedProject}
+          isOpen={detailOpen} 
+          onClose={handleCloseDetail}
+          loading={detailLoading}
+        />
         )}
       </AnimatePresence>
     </section>
