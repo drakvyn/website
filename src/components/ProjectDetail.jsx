@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect } from 'react';
 
-export default function ProjectDetail({ project, isOpen, onClose }) {
+export default function ProjectDetail({ project, isOpen, onClose, loading = false }) {
   if (!project) return null;
 
   // Handle body scroll lock
@@ -69,90 +69,99 @@ export default function ProjectDetail({ project, isOpen, onClose }) {
               </div>
             </div>
 
-            <div className="p-8">
-              <div className="flex flex-wrap gap-3 mb-6">
-                <div className="mb-2">
-                  <span className="text-md md:text-md text-zinc-400 font-manrope tracking-wider uppercase">Used Technologies</span>
-                </div>
-                <div className="flex flex-wrap gap-2 md:gap-3 bg-white p-3 rounded-lg relative w-full">
-                  <div className="absolute inset-0 bg-white rounded-lg text-overlay"></div>
-                  {project.tags && project.tags.map((tag, index) => (
-                    <span 
-                      key={index} 
-                      className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-black font-manrope tracking-wide relative z-10"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+            {loading ? (
+              <div className="p-8 flex items-center justify-center min-h-[300px]">
+                <div className="text-center">
+                  <div className="inline-block animate-spin h-8 w-8 border-t-2 border-white rounded-full mb-4"></div>
+                  <p className="text-zinc-400">Loading project details...</p>
                 </div>
               </div>
-
-              <div className="mb-8">
-                {project.detailedDescription && (
-                  <div className="mt-6">
-                    <h3 className="text-3xl font-squada text-white mb-4">
-                      <span className="text-overlay">PROJECT DETAILS</span>
-                    </h3>
-                    <p className="text-zinc-300 text-lg mb-4">
-                      {project.detailedDescription}
-                    </p>
+            ) : (
+              <div className="p-8">
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <div className="mb-2">
+                    <span className="text-md md:text-md text-zinc-400 font-manrope tracking-wider uppercase">Used Technologies</span>
                   </div>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div>
-                  <h3 className="text-3xl font-squada text-white mb-4">
-                    <span className="text-overlay">CHALLENGES</span>
-                  </h3>
-                  <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    {project.challenges && project.challenges.length > 0 ? 
-                      project.challenges.map((challenge, index) => (
-                        <li key={index} className="text-zinc-300">{challenge}</li>
-                      )) : 
-                      <li className="text-zinc-300">No challenges listed for this project</li>
-                    }
-                  </ul>
+                  <div className="flex flex-wrap gap-2 md:gap-3 bg-white p-3 rounded-lg relative w-full">
+                    <div className="absolute inset-0 bg-white rounded-lg text-overlay"></div>
+                    {project.tags && project.tags.map((tag, index) => (
+                      <span 
+                        key={index} 
+                        className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm text-black font-manrope tracking-wide relative z-10"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-3xl font-squada text-white mb-4">
-                    <span className="text-overlay">SOLUTIONS</span>
-                  </h3>
-                  <ul className="list-disc pl-5 text-zinc-400 space-y-2">
-                    {project.solutions && project.solutions.length > 0 ? 
-                      project.solutions.map((solution, index) => (
-                        <li key={index} className="text-zinc-300">{solution}</li>
-                      )) : 
-                      <li className="text-zinc-300">No solutions listed for this project</li>
-                    }
-                  </ul>
+
+                <div className="mb-8">
+                  {project.detailedDescription && (
+                    <div className="mt-6">
+                      <h3 className="text-3xl font-squada text-white mb-4">
+                        <span className="text-overlay">PROJECT DETAILS</span>
+                      </h3>
+                      <p className="text-zinc-300 text-lg mb-4">
+                        {project.detailedDescription}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                  <div>
+                    <h3 className="text-3xl font-squada text-white mb-4">
+                      <span className="text-overlay">CHALLENGES</span>
+                    </h3>
+                    <ul className="list-disc pl-5 text-zinc-400 space-y-2">
+                      {project.challenges && project.challenges.length > 0 ? 
+                        project.challenges.map((challenge, index) => (
+                          <li key={index} className="text-zinc-300">{challenge}</li>
+                        )) : 
+                        <li className="text-zinc-300">No challenges listed for this project</li>
+                      }
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-squada text-white mb-4">
+                      <span className="text-overlay">SOLUTIONS</span>
+                    </h3>
+                    <ul className="list-disc pl-5 text-zinc-400 space-y-2">
+                      {project.solutions && project.solutions.length > 0 ? 
+                        project.solutions.map((solution, index) => (
+                          <li key={index} className="text-zinc-300">{solution}</li>
+                        )) : 
+                        <li className="text-zinc-300">No solutions listed for this project</li>
+                      }
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-4 mt-8">
+                  {project.link && (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
+                    >
+                      <span className="relative z-10 text-overlay">VIEW WEBSITE</span>
+                    </a>
+                  )}
+                  
+                  {project.repositoryLink && (
+                    <a 
+                      href={project.repositoryLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
+                    >
+                      <span className="relative z-10 text-overlay">VIEW REPOSITORY</span>
+                    </a>
+                  )}
                 </div>
               </div>
-
-              <div className="flex flex-wrap justify-center gap-4 mt-8">
-                {project.link && (
-                  <a 
-                    href={project.link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
-                  >
-                    <span className="relative z-10 text-overlay">VIEW WEBSITE</span>
-                  </a>
-                )}
-                
-                {project.repositoryLink && (
-                  <a 
-                    href={project.repositoryLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white text-black text-xl font-semibold rounded-lg hover:bg-zinc-100 transition-all duration-300 transform hover:scale-105 relative overflow-hidden"
-                  >
-                    <span className="relative z-10 text-overlay">VIEW REPOSITORY</span>
-                  </a>
-                )}
-              </div>
-            </div>
+            )}
           </motion.div>
         </motion.div>
       )}
