@@ -21,21 +21,38 @@ export default function DirectLinksMotion() {
         </h2>
         <div className="flex-1"></div>
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between w-full gap-4 md:gap-0">
-          <motion.a 
-            href="#"
-            target="_blank"
-            className="border-2 border-[#1F1B24] text-[#1F1B24] px-[15px] py-[10px] rounded-[5px] text-sm md:text-base font-manrope font-semibold text-center w-full md:w-fit hover:bg-[#1F1B24] hover:text-white transition-all duration-200" 
-            style={{ background: 'none' }}
-            whileHover={{ 
-              scale: 1.05,
-              backgroundColor: '#1F1B24',
-              color: '#FFFFFF',
-              transition: { duration: 0.2 }
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="text-overlay">DOWNLOAD RESUME</span>
-          </motion.a>
+          <div className="flex flex-col md:flex-row gap-4 w-full md:w-fit">
+            <motion.a 
+              href="https://drive.google.com/file/d/1SRwfkgz6p3WmoQTvQIzicybx5HAUZEPI/view?usp=sharing"
+              target="_blank"
+              className="border-2 border-[#1F1B24] text-[#1F1B24] px-[15px] py-[10px] rounded-[5px] text-sm md:text-base font-manrope font-semibold text-center w-full md:w-fit hover:bg-[#1F1B24] hover:text-white transition-all duration-200" 
+              style={{ background: 'none' }}
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: '#1F1B24',
+                color: '#FFFFFF',
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="text-overlay">CV (EN)</span>
+            </motion.a>
+            <motion.a 
+              href="https://drive.google.com/file/d/1nu6CAP8dK-oUmLDe93Qdue46u-7bWT0r/view?usp=sharing"
+              target="_blank"
+              className="border-2 border-[#1F1B24] text-[#1F1B24] px-[15px] py-[10px] rounded-[5px] text-sm md:text-base font-manrope font-semibold text-center w-full md:w-fit hover:bg-[#1F1B24] hover:text-white transition-all duration-200" 
+              style={{ background: 'none' }}
+              whileHover={{ 
+                scale: 1.05,
+                backgroundColor: '#1F1B24',
+                color: '#FFFFFF',
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="text-overlay">CV (ES)</span>
+            </motion.a>
+          </div>
           <div className="flex gap-4">
             <motion.a 
               href="https://github.com/TheSoftwareWizard" 
