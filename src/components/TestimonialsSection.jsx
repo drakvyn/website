@@ -68,7 +68,7 @@ const testimonials = [
   }
 ];
 
-const SLIDE_DURATION = 7500; // Duración total en ms
+const SLIDE_DURATION = 4500; // Duración total en ms
 const PROGRESS_INTERVAL = 10; // Intervalo de actualización en ms
 const PROGRESS_INCREMENT = (PROGRESS_INTERVAL / SLIDE_DURATION) * 100; // Calculamos el incremento exacto
 
@@ -170,15 +170,7 @@ export default function TestimonialsSection() {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-                <div className="relative">
-                  <img
-                    src={testimonials[currentIndex].image}
-                    alt={testimonials[currentIndex].name}
-                    className="w-24 h-24 rounded-xl object-cover"
-                  />
-                  <div className="absolute inset-0 rounded-xl ring-2 ring-white/30 ring-offset-2 ring-offset-[#181924]"></div>
-                </div>
+              <div className="mb-8">
                 <div className="text-center md:text-left">
                   <h3 className="text-2xl font-squada text-white mb-2">
                     <span className="text-overlay">{testimonials[currentIndex].name}</span>
@@ -190,24 +182,6 @@ export default function TestimonialsSection() {
                 "{testimonials[currentIndex].text}"
               </blockquote>
               <div className="flex flex-col gap-4">
-                <div className="flex justify-between items-center">
-                  <a
-                    href={testimonials[currentIndex].linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors group"
-                  >
-                    <span>See on LinkedIn</span>
-                    <svg 
-                      className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
-                      fill="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </a>
-                </div>
-                
                 {/* Navigation Controls */}
                 <div className="flex justify-between items-center mt-4">
                   <button
