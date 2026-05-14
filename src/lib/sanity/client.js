@@ -1,12 +1,12 @@
 import { createClient } from '@sanity/client';
 
-// Cliente de solo lectura para el frontend
+// Sin token: lectura pública vía API/CDN. Requiere dataset público en manage.sanity.io.
+// Si el dataset es privado, crea un token Viewer y pásalo solo en rutas servidor (no aquí).
 export const client = createClient({
   projectId: '6704b0nj',
   dataset: 'production',
-  useCdn: true, // Usar CDN para mejor rendimiento
-  apiVersion: '2022-06-01',
-  token: import.meta.env.PUBLIC_SANITY_TOKEN // Token de solo lectura
+  useCdn: true,
+  apiVersion: '2024-01-01',
 });
 
 // Helper function to fetch blog posts with pagination
