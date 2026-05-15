@@ -1,0 +1,8 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ExperiencePage } from "../components/react/ExperiencePage";
+---
+
+<Layout title="ARCHITECT.OS — Experiencia">
+  <ExperiencePage client:load pathname={Astro.url.pathname} />
+</Layout>

@@ -1,27 +1,69 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
+@theme {
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-body: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-noir-bg: #0d1515;
+  --color-noir-elevated: #192122;
+  --color-noir-border: #3b494b;
+  --color-noir-muted: #b9cacb;
+  --color-cyan: #00f0ff;
+  --color-cyan-dim: #00dbe9;
+  --color-violet: #d0bcff;
+  --color-violet-deep: #571bc1;
+  --color-gold: #fed639;
+  --color-text: #dce4e5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-noir-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono-tech {
+  font-family: var(--font-mono);
+}
+
+/* Fondo tipo cuadrícula técnica */
+.bg-tech-grid {
+  background-image:
+    radial-gradient(circle at center, rgba(0, 240, 255, 0.07) 0%, transparent 55%),
+    linear-gradient(rgba(132, 148, 149, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(132, 148, 149, 0.08) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    48px 48px,
+    48px 48px;
+}
+
+/* Cursor parpadeante tipo terminal */
+@keyframes cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
   }
-
-  body {
-    @apply text-white;
+  50%,
+  100% {
+    opacity: 0;
   }
 }
 
-@layer components {
-  .btn {
-    @apply px-6 py-2 rounded-lg font-manrope transition-all duration-300;
-  }
-
-  .btn-primary {
-    @apply bg-indigo-600 hover:bg-indigo-700 text-white;
-  }
-
-  .section {
-    @apply py-16 md:py-24;
-  }
+.animate-cursor-blink {
+  animation: cursor-blink 1.1s step-end infinite;
 }

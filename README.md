@@ -1,56 +1,8 @@
-# Portfolio Website
-
-A modern portfolio website built with Astro, Tailwind CSS, and featuring animations with Framer Motion.
-
-## Features
-
-- 🚀 Built with Astro for optimal performance
-- 🎨 Styled with Tailwind CSS
-- ✨ Smooth animations with Framer Motion
-- 🎯 Responsive design
-- 🎭 Custom fonts (Squada One and Manrope)
-- 💳 Stripe integration for payments
-- 📝 Content management with Strapi
-
-## Getting Started
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-## Project Structure
-
-- `src/layouts/` - Layout components
-- `src/pages/` - Astro pages
-- `src/components/` - Reusable components
-- `src/styles/` - Global styles and Tailwind configuration
-- `public/` - Static assets
-
-## Technologies Used
-
-- Astro
-- Tailwind CSS
-- Framer Motion
-- Stripe
-- Strapi (Headless CMS)
-
-## License
-
-MIT
+# Astro Starter Kit: Minimal
 
 ```sh
 npm create astro@latest -- --template minimal
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 

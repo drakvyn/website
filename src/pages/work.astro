@@ -1,0 +1,8 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { WorkPage } from "../components/react/WorkPage";
+---
+
+<Layout title="ARCHITECT.OS — Trabajo seleccionado">
+  <WorkPage client:load pathname={Astro.url.pathname} />
+</Layout>

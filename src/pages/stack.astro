@@ -1,0 +1,8 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { StackPage } from "../components/react/StackPage";
+---
+
+<Layout title="ARCHITECT.OS — Stack técnico">
+  <StackPage client:load pathname={Astro.url.pathname} />
+</Layout>
