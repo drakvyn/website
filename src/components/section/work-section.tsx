@@ -9,6 +9,7 @@ import {
 import { DATA } from "@/data/resume";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Markdown from "react-markdown";
 
 function LogoImage({ src, alt }: { src: string; alt: string }) {
   const [imageError, setImageError] = useState(false);
@@ -30,8 +31,15 @@ function LogoImage({ src, alt }: { src: string; alt: string }) {
 }
 
 export default function WorkSection() {
+  const latestWork = DATA.work[0];
+
   return (
-    <Accordion type="single" collapsible className="w-full grid gap-6">
+    <Accordion
+      type="single"
+      collapsible
+      defaultValue={latestWork?.company}
+      className="w-full grid gap-6"
+    >
       {DATA.work.map((work) => (
         <AccordionItem
           key={work.company}
@@ -75,8 +83,8 @@ export default function WorkSection() {
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground">
-            {work.description}
+          <AccordionContent className="p-0 ml-13 text-xs sm:text-sm text-muted-foreground prose dark:prose-invert max-w-full">
+            <Markdown>{work.description}</Markdown>
           </AccordionContent>
         </AccordionItem>
       ))}

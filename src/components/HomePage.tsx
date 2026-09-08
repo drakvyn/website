@@ -8,8 +8,10 @@ import ContactSection from "@/components/section/contact-section";
 import HackathonsSection from "@/components/section/hackathons-section";
 import PhotosSection from "@/components/section/photos-section";
 import ProjectsSection from "@/components/section/projects-section";
+import TestimonialsSection from "@/components/section/testimonials-section";
 import WorkSection from "@/components/section/work-section";
-import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowUpRight, FileText } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -23,6 +25,20 @@ const sectionComponents: Record<string, React.ReactNode> = {
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
             <Markdown>{DATA.summary}</Markdown>
+          </div>
+          <div className="flex flex-wrap gap-2 mt-4">
+            {DATA.cv.map((item) => (
+              <Button key={item.href} variant="outline" size="sm" asChild>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FileText className="size-3.5" />
+                  {item.label}
+                </a>
+              </Button>
+            ))}
           </div>
         </BlurFade>
       </div>
@@ -106,6 +122,13 @@ const sectionComponents: Record<string, React.ReactNode> = {
     <section id="projects">
       <BlurFade delay={BLUR_FADE_DELAY * 11}>
         <ProjectsSection />
+      </BlurFade>
+    </section>
+  ),
+  testimonials: (
+    <section id="testimonials">
+      <BlurFade delay={BLUR_FADE_DELAY * 13}>
+        <TestimonialsSection />
       </BlurFade>
     </section>
   ),
